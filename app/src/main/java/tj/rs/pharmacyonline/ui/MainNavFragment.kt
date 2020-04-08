@@ -1,6 +1,7 @@
 package tj.rs.pharmacyonline.ui
 
 
+import android.content.res.Configuration
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -39,8 +40,14 @@ class MainNavFragment : Fragment(), LastMedicineRVAdapter.OnItemClickListener {
         binding.lastMedicineViewModel = lastMedicineViewModel
         binding.executePendingBindings()
 
-        binding.includeLastMedicine.repositoryRv.layoutManager =
-            GridLayoutManager(requireContext(), 3)
+        if(resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT){
+            binding.includeLastMedicine.repositoryRv.layoutManager =
+                GridLayoutManager(requireContext(), 3)
+        } else {
+            binding.includeLastMedicine.repositoryRv.layoutManager =
+                GridLayoutManager(requireContext(), 5)
+        }
+
         binding.includeLastMedicine.repositoryRv.adapter = lastMedicineRVAdapter
 
         lastMedicineViewModel.loadLastMedicine()
