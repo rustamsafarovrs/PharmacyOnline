@@ -15,6 +15,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.navOptions
 import androidx.recyclerview.widget.GridLayoutManager
 import com.google.android.material.snackbar.Snackbar
+import kotlinx.android.synthetic.main.toolbar.*
 import tj.rs.pharmacyonline.R
 import tj.rs.pharmacyonline.adapter.LastMedicineRVAdapter
 import tj.rs.pharmacyonline.data.model.Medicine

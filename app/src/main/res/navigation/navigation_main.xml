@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/mainNavFragment"
         android:name="tj.rs.pharmacyonline.ui.MainNavFragment"
-        android:label="fragment_main_nav"
+        android:label=""
         tools:layout="@layout/fragment_main_nav" >
         <action
             android:id="@+id/action_mainNavFragment_to_medicineDetailsFragment"
@@ -17,7 +17,7 @@
     <fragment
         android:id="@+id/medicineDetailsFragment"
         android:name="tj.rs.pharmacyonline.ui.medicinedetails.MedicineDetailsFragment"
-        android:label="MedicineDetailsFragment" >
+        android:label="" >
         <argument
             android:name="id"
             app:argType="integer" />
