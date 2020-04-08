@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="tj.rs.pharmacyonline.ui.medicinedetails.MedicineDetailsFragmentViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.medicinedetails.MedicineDetailsFragment">
+
+        <TextView
+            android:id="@+id/tv_id"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:text="tv_medicine_id"
+            android:text="@{String.valueOf(viewModel.id)}" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

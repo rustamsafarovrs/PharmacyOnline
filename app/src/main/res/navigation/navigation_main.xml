@@ -9,5 +9,17 @@
         android:id="@+id/mainNavFragment"
         android:name="tj.rs.pharmacyonline.ui.MainNavFragment"
         android:label="fragment_main_nav"
-        tools:layout="@layout/fragment_main_nav" />
+        tools:layout="@layout/fragment_main_nav" >
+        <action
+            android:id="@+id/action_mainNavFragment_to_medicineDetailsFragment"
+            app:destination="@id/medicineDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/medicineDetailsFragment"
+        android:name="tj.rs.pharmacyonline.ui.medicinedetails.MedicineDetailsFragment"
+        android:label="MedicineDetailsFragment" >
+        <argument
+            android:name="id"
+            app:argType="integer" />
+    </fragment>
 </navigation>

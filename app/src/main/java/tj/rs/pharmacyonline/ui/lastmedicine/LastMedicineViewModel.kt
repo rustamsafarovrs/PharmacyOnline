@@ -18,6 +18,10 @@ class LastMedicineViewModel(application: Application) : AndroidViewModel(applica
     val isLoading = ObservableField<Boolean>()
     val repository = MutableLiveData<ArrayList<Medicine>>()
 
+    init {
+        loadLastMedicine()
+    }
+
     fun loadLastMedicine() {
         isLoading.set(true)
         lastMedicineRepository.getLastMedicines(object :
