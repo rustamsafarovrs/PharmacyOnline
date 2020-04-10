@@ -7,9 +7,16 @@ import tj.rs.pharmacyonline.data.model.Medicine
  * Created by Rustam Safarov (RS) on 06.04.2020.
  * (c) 2020 RS DevTeam. All rights reserved!
  */
-class LastMedicineLocalDataSource() {
+class MedicineLocalDataSource {
+    private constructor() {}
+
+    companion object {
+        val instance = MedicineLocalDataSource()
+    }
+
+    var arrayList = ArrayList<Medicine>()
     fun getLastMedicine(onLastMedicineLocalDataReadyCallback: OnLastMedicineLocalDataReadyCallback) {
-        val arrayList = ArrayList<Medicine>()
+        arrayList.clear()
         arrayList.add(
             Medicine(
                 1,
@@ -38,8 +45,25 @@ class LastMedicineLocalDataSource() {
     fun saveLastMedicines(data: ArrayList<Medicine>) {
 
     }
+
+    fun getMedicine(id: Int, onMedicineLocalDataReadyCallback: OnMedicineLocalDataReadyCallback) {
+        var data: Medicine? = null
+        for (medicine in arrayList) {
+            if (medicine.id == id) {
+                data = medicine
+            }
+        }
+        Handler().postDelayed(
+            { onMedicineLocalDataReadyCallback.onLocalMedicineReadyCallback(data) },
+            2000
+        )
+    }
 }
 
 interface OnLastMedicineLocalDataReadyCallback {
     fun onLocalDataReadyCallback(data: ArrayList<Medicine>)
+}
+
+interface OnMedicineLocalDataReadyCallback {
+    fun onLocalMedicineReadyCallback(data: Medicine?)
 }

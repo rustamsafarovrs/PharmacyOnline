@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
+        <import type="android.view.View" />
+
         <variable
             name="viewModel"
             type="tj.rs.pharmacyonline.ui.medicinedetails.MedicineDetailsFragmentViewModel" />
@@ -10,15 +14,109 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".ui.medicinedetails.MedicineDetailsFragment">
+        android:layout_height="match_parent">
+
+        <ProgressBar
+            android:id="@+id/loading"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:visibility="@{viewModel.isLoading() ? View.VISIBLE : View.GONE}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/tv_id"
+            android:id="@+id/tv_null"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Нет данных"
+            android:textSize="@dimen/tv_size_3"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:visibility="visible" />
+
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/nestedScrollView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:text="tv_medicine_id"
-            android:text="@{String.valueOf(viewModel.id)}" />
+            android:visibility="@{viewModel.isLoading() ? View.GONE : View.VISIBLE}">
 
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="8dp"
+                tools:context=".ui.medicinedetails.MedicineDetailsFragment">
+
+
+                <ImageView
+                    android:id="@+id/imageView2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:adjustViewBounds="true"
+                    android:scaleType="centerCrop"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/medicine" />
+
+                <TextView
+                    android:id="@+id/tv_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="@{viewModel.medicine.name}"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/tv_size_1"
+                    android:textStyle="bold"
+                    app:layout_constraintTop_toBottomOf="@id/imageView2"
+                    tools:layout_editor_absoluteX="8dp"
+                    tools:text="tv_name" />
+
+                <TextView
+                    android:id="@+id/tv_price"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@{String.valueOf(viewModel.medicine.price)}"
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/tv_size_2"
+                    app:layout_constraintTop_toBottomOf="@id/tv_name"
+                    tools:text="tv_price" />
+
+                <TextView
+                    android:id="@+id/tv_description_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="Краткое описание"
+                    android:textAllCaps="true"
+                    android:textColor="@color/descriptionColor"
+                    android:textSize="@dimen/tv_size_3"
+                    app:layout_constraintTop_toBottomOf="@id/tv_price"
+                    tools:layout_editor_absoluteX="8dp" />
+
+                <View
+                    android:id="@+id/description_divider_line"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/descriptionColor"
+                    app:layout_constraintTop_toBottomOf="@id/tv_description_title" />
+
+                <TextView
+                    android:id="@+id/tv_description"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@{viewModel.medicine.desc}"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/tv_size_3"
+                    app:layout_constraintTop_toBottomOf="@id/description_divider_line"
+                    tools:text="tv_descripton" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.core.widget.NestedScrollView>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

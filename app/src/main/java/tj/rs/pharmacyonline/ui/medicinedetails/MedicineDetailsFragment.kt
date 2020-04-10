@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
+import kotlinx.android.synthetic.main.fragment_medicine_details.*
 import tj.rs.pharmacyonline.R
 import tj.rs.pharmacyonline.databinding.FragmentMedicineDetailsBinding
 
@@ -30,6 +31,7 @@ class MedicineDetailsFragment : Fragment() {
         // Inflate the layout for this fragment
         binding =
             DataBindingUtil.inflate(inflater, R.layout.fragment_medicine_details, container, false)
+        binding.lifecycleOwner = this
 
         viewModel = ViewModelProvider(this).get(MedicineDetailsFragmentViewModel::class.java)
         viewModel.setArgs(args.id)
@@ -37,14 +39,12 @@ class MedicineDetailsFragment : Fragment() {
 
         binding.executePendingBindings()
 
-        viewModel.id.observe(this, Observer<Int> {
-            it?.let {
-                binding.tvId.text = it.toString()
-            }
+        viewModel.medicine.observe(this, Observer {
+            binding.tvName.text = it.name
+            binding.tvPrice.text = it.price.toString()
+            binding.tvDescription.text = it.desc
         })
 
         return binding.root
     }
-
-
 }
