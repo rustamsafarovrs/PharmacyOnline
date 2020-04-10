@@ -6,7 +6,6 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import tj.rs.pharmacyonline.data.model.Medicine
 import tj.rs.pharmacyonline.databinding.RvMedicineItemBinding
-import kotlin.math.log
 
 /**
  * Created by Rustam Safarov (RS) on 07.04.2020.
@@ -48,7 +47,7 @@ class LastMedicineRVAdapter(
         fun bind(medi: Medicine, listener: OnItemClickListener?) {
             binding.medicine = medi
             if (listener != null) {
-                binding.root.setOnClickListener { _ ->
+                binding.root.setOnClickListener {
                     listener.onItemClick(layoutPosition)
                 }
             }

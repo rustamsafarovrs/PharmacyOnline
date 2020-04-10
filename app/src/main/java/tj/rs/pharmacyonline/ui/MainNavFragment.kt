@@ -10,18 +10,14 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.navOptions
 import androidx.recyclerview.widget.GridLayoutManager
-import com.google.android.material.snackbar.Snackbar
-import kotlinx.android.synthetic.main.toolbar.*
 import tj.rs.pharmacyonline.R
 import tj.rs.pharmacyonline.adapter.LastMedicineRVAdapter
 import tj.rs.pharmacyonline.data.model.Medicine
 import tj.rs.pharmacyonline.databinding.FragmentMainNavBinding
 import tj.rs.pharmacyonline.ui.lastmedicine.LastMedicineViewModel
-import tj.rs.pharmacyonline.ui.medicinedetails.MedicineDetailsFragmentArgs
 
 /**
  * A simple [Fragment] subclass.
@@ -75,7 +71,7 @@ class MainNavFragment : Fragment(), LastMedicineRVAdapter.OnItemClickListener {
         binding.includeLastMedicine.repositoryRv.adapter = lastMedicineRVAdapter
 
         lastMedicineViewModel.repository.observe(
-            this,
+            viewLifecycleOwner,
             Observer<ArrayList<Medicine>> { it?.let { lastMedicineRVAdapter.replaceData(it) } })
     }
 

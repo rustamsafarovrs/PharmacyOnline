@@ -7,8 +7,7 @@ import tj.rs.pharmacyonline.data.model.Medicine
  * Created by Rustam Safarov (RS) on 06.04.2020.
  * (c) 2020 RS DevTeam. All rights reserved!
  */
-class MedicineLocalDataSource {
-    private constructor() {}
+class MedicineLocalDataSource private constructor() {
 
     companion object {
         val instance = MedicineLocalDataSource()

@@ -5,7 +5,6 @@ import android.util.Log
 import androidx.databinding.ObservableField
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import tj.rs.pharmacyonline.data.lastmedicine.MedicineRepository
 import tj.rs.pharmacyonline.data.model.Medicine
 import tj.rs.pharmacyonline.modules.NetManager
@@ -24,7 +23,7 @@ class MedicineDetailsFragmentViewModel(application: Application) : AndroidViewMo
     }
 
     private fun loadMedicine(id: Int) {
-        Log.i("MedicineDetails", "loading medicine by id: " + id)
+        Log.i("MedicineDetails", "loading medicine by id: $id")
         isLoading.set(true)
         medicineRepository.getMedicine(id, object: MedicineRepository.OnMedicineReadyCallback{
             override fun onMedicineDataReady(data: Medicine?) {

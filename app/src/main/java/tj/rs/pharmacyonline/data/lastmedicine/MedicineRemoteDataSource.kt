@@ -2,15 +2,13 @@ package tj.rs.pharmacyonline.data.lastmedicine
 
 import android.os.Handler
 import tj.rs.pharmacyonline.data.model.Medicine
-import java.lang.Exception
 
 /**
  * Created by Rustam Safarov (RS) on 06.04.2020.
  * (c) 2020 RS DevTeam. All rights reserved!
  */
 
-class MedicineRemoteDataSource {
-    private constructor()
+class MedicineRemoteDataSource private constructor() {
 
     companion object {
         val instance = MedicineRemoteDataSource()

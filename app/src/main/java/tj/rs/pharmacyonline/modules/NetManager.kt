@@ -9,8 +9,6 @@ import android.net.ConnectivityManager
  */
 
 class NetManager(private var applicationContext: Context) {
-    private var status: Boolean? = false
-
     val isConnectedToInternet: Boolean?
         get() {
             val conManager =
