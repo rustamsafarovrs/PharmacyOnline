@@ -54,7 +54,7 @@ class MedicineLocalDataSource private constructor() {
         }
         Handler().postDelayed(
             { onMedicineLocalDataReadyCallback.onLocalMedicineReadyCallback(data) },
-            2000
+            1000
         )
     }
 }

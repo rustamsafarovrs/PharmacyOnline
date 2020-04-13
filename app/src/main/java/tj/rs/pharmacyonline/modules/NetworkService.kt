@@ -11,7 +11,7 @@ import retrofit2.converter.gson.GsonConverterFactory
  * (c) 2020 RS DevTeam. All rights reserved!
  */
 class NetworkService private constructor() {
-    private val BASE_URL = " http://demo4891186.mockable.io/pharmacy/"
+    private val BASE_URL = " https://demo4891186.mockable.io/pharmacy/"
 
     private val loggingInterceptor = run {
         val httpLoggingInterceptor = HttpLoggingInterceptor()

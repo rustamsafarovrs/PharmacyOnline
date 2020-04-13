@@ -39,6 +39,7 @@ class MedicineRemoteDataSource private constructor() {
                 }
             }
         })
+
         Handler().postDelayed(
             { onMedicineRemoteReadyCallback.onRemoteDataReadyCallback(arrayList) },
             2000
@@ -58,7 +59,7 @@ class MedicineRemoteDataSource private constructor() {
 
         Handler().postDelayed(
             { onMedicineRemoteReadyCallback.onRemoteMedicineDataReadyCallback(data) },
-            2000
+            1000
         )
     }
 }
