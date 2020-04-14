@@ -78,7 +78,6 @@ class MainNavFragment : Fragment(), LastMedicineRVAdapter.OnItemClickListener {
         val button = view.findViewById<MaterialButton>(R.id.mb_refresh)
         button.setOnClickListener {
             lastMedicineViewModel.loadLastMedicine()
-//            showInternetConnection()
         }
         lastMedicineViewModel.isLoading.observe(viewLifecycleOwner, Observer {
             if (it == true) {
@@ -87,7 +86,7 @@ class MainNavFragment : Fragment(), LastMedicineRVAdapter.OnItemClickListener {
         })
     }
 
-    fun showInternetConnection() {
+    private fun showInternetConnection() {
         if (!lastMedicineViewModel.netManager.isConnectedToInternet!!) {
             Snackbar.make(binding.root, "No internet connection", Snackbar.LENGTH_SHORT).show()
         }
