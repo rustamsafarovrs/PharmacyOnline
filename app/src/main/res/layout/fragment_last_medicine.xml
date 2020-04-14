@@ -24,7 +24,7 @@
             android:layout_height="wrap_content"
             android:indeterminate="true"
             android:visibility="@{viewModel.isLoading ? View.VISIBLE : View.GONE}"
-            app:layout_constraintBottom_toTopOf="@+id/button"
+            app:layout_constraintBottom_toTopOf="@+id/mb_refresh"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
@@ -38,7 +38,7 @@
             android:layout_marginBottom="8dp"
             android:indeterminate="true"
             android:visibility="@{viewModel.isLoading ? View.GONE : View.VISIBLE}"
-            app:layout_constraintBottom_toTopOf="@+id/button"
+            app:layout_constraintBottom_toTopOf="@+id/mb_refresh"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -47,12 +47,11 @@
         </androidx.recyclerview.widget.RecyclerView>
 
         <Button
-            android:id="@+id/button"
+            android:id="@+id/mb_refresh"
             android:layout_width="wrap_content"
             android:textColor="@android:color/black"
             android:layout_height="wrap_content"
             android:text="refresh"
-            android:onClick="@{() -> viewModel.loadLastMedicine()}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />

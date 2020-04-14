@@ -13,6 +13,8 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.navOptions
 import androidx.recyclerview.widget.GridLayoutManager
+import com.google.android.material.button.MaterialButton
+import com.google.android.material.snackbar.Snackbar
 import tj.rs.pharmacyonline.R
 import tj.rs.pharmacyonline.adapter.LastMedicineRVAdapter
 import tj.rs.pharmacyonline.data.model.Medicine
@@ -73,7 +75,22 @@ class MainNavFragment : Fragment(), LastMedicineRVAdapter.OnItemClickListener {
         lastMedicineViewModel.repository.observe(
             viewLifecycleOwner,
             Observer<ArrayList<Medicine>> { it?.let { lastMedicineRVAdapter.replaceData(it) } })
+        val button = view.findViewById<MaterialButton>(R.id.mb_refresh)
+        button.setOnClickListener {
+            lastMedicineViewModel.loadLastMedicine()
+//            showInternetConnection()
+        }
+        lastMedicineViewModel.isLoading.observe(viewLifecycleOwner, Observer {
+            if (it == true) {
+                showInternetConnection()
+            }
+        })
     }
 
+    fun showInternetConnection() {
+        if (!lastMedicineViewModel.netManager.isConnectedToInternet!!) {
+            Snackbar.make(binding.root, "No internet connection", Snackbar.LENGTH_SHORT).show()
+        }
+    }
 
 }

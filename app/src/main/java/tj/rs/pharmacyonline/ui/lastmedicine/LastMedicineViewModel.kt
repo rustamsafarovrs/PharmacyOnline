@@ -2,7 +2,6 @@ package tj.rs.pharmacyonline.ui.lastmedicine
 
 import android.app.Application
 import android.util.Log
-import androidx.databinding.ObservableField
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import tj.rs.pharmacyonline.data.lastmedicine.MedicineRepository
@@ -14,8 +13,9 @@ import tj.rs.pharmacyonline.modules.NetManager
  * (c) 2020 RS DevTeam. All rights reserved!
  */
 class LastMedicineViewModel(application: Application) : AndroidViewModel(application) {
-    val lastMedicineRepository = MedicineRepository(NetManager(getApplication()))
-    val isLoading = ObservableField<Boolean>()
+    val netManager = NetManager(getApplication())
+    val lastMedicineRepository = MedicineRepository(netManager)
+    val isLoading = MutableLiveData<Boolean>()
     val repository = MutableLiveData<ArrayList<Medicine>>()
 
     init {
@@ -23,12 +23,12 @@ class LastMedicineViewModel(application: Application) : AndroidViewModel(applica
     }
 
     fun loadLastMedicine() {
-        isLoading.set(true)
+        isLoading.postValue(true)
         lastMedicineRepository.getLastMedicines(object :
             MedicineRepository.OnLastMedicineReadyCallback {
             override fun onDataReady(data: ArrayList<Medicine>) {
                 Log.i("LastMedicineViewModel", "getLastMedicine: onDataReady")
-                isLoading.set(false)
+                isLoading.postValue(false)
                 repository.value = data
             }
         })
