@@ -1,4 +1,4 @@
-package tj.rs.pharmacyonline.ui
+package tj.rs.pharmacyonline.ui.main
 
 
 import android.content.res.Configuration
@@ -16,9 +16,9 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.snackbar.Snackbar
 import tj.rs.pharmacyonline.R
-import tj.rs.pharmacyonline.adapter.LastMedicineRVAdapter
 import tj.rs.pharmacyonline.data.model.Medicine
 import tj.rs.pharmacyonline.databinding.FragmentMainNavBinding
+import tj.rs.pharmacyonline.ui.lastmedicine.LastMedicineRVAdapter
 import tj.rs.pharmacyonline.ui.lastmedicine.LastMedicineViewModel
 
 /**
@@ -27,7 +27,11 @@ import tj.rs.pharmacyonline.ui.lastmedicine.LastMedicineViewModel
 class MainNavFragment : Fragment(), LastMedicineRVAdapter.OnItemClickListener {
 
     lateinit var binding: FragmentMainNavBinding
-    private val lastMedicineRVAdapter = LastMedicineRVAdapter(arrayListOf(), this)
+    private val lastMedicineRVAdapter =
+        LastMedicineRVAdapter(
+            arrayListOf(),
+            this
+        )
     lateinit var lastMedicineViewModel: LastMedicineViewModel
 
     private val options = navOptions {
@@ -64,7 +68,7 @@ class MainNavFragment : Fragment(), LastMedicineRVAdapter.OnItemClickListener {
 
         if (resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT) {
             binding.includeLastMedicine.repositoryRv.layoutManager =
-                GridLayoutManager(requireContext(), 3)
+                GridLayoutManager(requireContext(), 2)
         } else {
             binding.includeLastMedicine.repositoryRv.layoutManager =
                 GridLayoutManager(requireContext(), 5)

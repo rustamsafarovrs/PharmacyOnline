@@ -1,4 +1,4 @@
-package tj.rs.pharmacyonline.adapter
+package tj.rs.pharmacyonline.ui.lastmedicine
 
 import android.util.Log
 import android.view.LayoutInflater

@@ -53,8 +53,23 @@
 
 
                 <ImageView
+                    android:layout_width="42dp"
+                    android:layout_height="42dp"
+                    android:layout_marginEnd="32dp"
+                    android:background="@drawable/profile_background"
+                    android:elevation="5dp"
+                    android:padding="8dp"
+                    android:tint="@color/white"
+                    android:src="@drawable/ic_favorite_border_black_24dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/view"
+                    app:layout_constraintEnd_toEndOf="@+id/imageView2"
+                    app:layout_constraintTop_toTopOf="@+id/imageView2"
+                    app:layout_constraintVertical_bias="1.0" />
+
+
+                <ImageView
                     android:id="@+id/imageView2"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:adjustViewBounds="true"
                     android:scaleType="centerCrop"
@@ -62,6 +77,14 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:srcCompat="@drawable/medicine" />
+
+                <View
+                    android:id="@+id/view"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="16dp"
+                    app:layout_constraintTop_toBottomOf="@id/imageView2"
+                    tools:layout_editor_absoluteX="8dp" />
 
                 <TextView
                     android:id="@+id/tv_name"

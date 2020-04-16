@@ -1,6 +1,7 @@
 package tj.rs.pharmacyonline.ui.main
 
 import android.os.Bundle
+import android.widget.RelativeLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
@@ -19,5 +20,7 @@ class MainActivity : AppCompatActivity() {
         val appBarConfiguration = AppBarConfiguration(navController.graph)
         setupWithNavController(toolbar, navController, appBarConfiguration)
 
+        val profileView = findViewById<RelativeLayout>(R.id.profileRelativeLayout)
+        profileView.setOnClickListener { navController.navigate(R.id.profileActivity) }
     }
 }
