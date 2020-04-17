@@ -47,7 +47,6 @@ class MainNavFragment : Fragment(), LastMedicineRVAdapter.OnItemClickListener {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         binding =
             DataBindingUtil.inflate(inflater, R.layout.fragment_main_nav, container, false)
         binding.lifecycleOwner = this
@@ -79,6 +78,7 @@ class MainNavFragment : Fragment(), LastMedicineRVAdapter.OnItemClickListener {
         lastMedicineViewModel.repository.observe(
             viewLifecycleOwner,
             Observer<ArrayList<Medicine>> { it?.let { lastMedicineRVAdapter.replaceData(it) } })
+
         val button = view.findViewById<MaterialButton>(R.id.mb_refresh)
         button.setOnClickListener {
             lastMedicineViewModel.loadLastMedicine()
@@ -92,7 +92,7 @@ class MainNavFragment : Fragment(), LastMedicineRVAdapter.OnItemClickListener {
 
     private fun showInternetConnection() {
         if (!lastMedicineViewModel.netManager.isConnectedToInternet!!) {
-            Snackbar.make(binding.root, "No internet connection", Snackbar.LENGTH_SHORT).show()
+            Snackbar.make(binding.root, "No internet connection", Snackbar.LENGTH_LONG).show()
         }
     }
 

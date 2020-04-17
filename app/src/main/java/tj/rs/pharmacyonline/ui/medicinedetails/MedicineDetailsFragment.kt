@@ -10,6 +10,8 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
+import com.google.android.material.snackbar.Snackbar
+import kotlinx.android.synthetic.main.fragment_medicine_details.*
 import tj.rs.pharmacyonline.R
 import tj.rs.pharmacyonline.databinding.FragmentMedicineDetailsBinding
 
@@ -45,5 +47,11 @@ class MedicineDetailsFragment : Fragment() {
         })
 
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        mb_buy.setOnClickListener {
+            Snackbar.make(binding.root, "TODO: Implement this action", Snackbar.LENGTH_SHORT).show()
+        }
     }
 }

@@ -9,5 +9,6 @@ data class Medicine(
     val name: String,
     val price: Int,
     val desc: String,
-    val img: String
+    val img: String,
+    val isFavorite: Boolean = false
 )

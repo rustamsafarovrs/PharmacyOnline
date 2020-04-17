@@ -36,10 +36,6 @@ class ProfileFragment : Fragment() {
         val myPurchasesView = my_purchases_root_view
         myPurchasesView.setOnClickListener {
             findNavController().navigate(R.id.myPurchasesFragment, null, options)
-//            val backImageView = activity?.findViewById<ImageView>(R.id.closeImageView)
-//            backImageView?.setOnClickListener{
-//                findNavController().navigateUp()
-//            }
         }
 
     }

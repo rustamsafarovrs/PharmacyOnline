@@ -5,8 +5,8 @@ import android.util.Log
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import tj.rs.pharmacyonline.data.model.LastMedicines
 import tj.rs.pharmacyonline.data.model.Medicine
-import tj.rs.pharmacyonline.data.model.Medicines
 import tj.rs.pharmacyonline.modules.NetworkService
 
 /**
@@ -20,17 +20,17 @@ class MedicineRemoteDataSource private constructor() {
         val instance = MedicineRemoteDataSource()
     }
 
-    val arrayList = ArrayList<Medicine>()
+    private val arrayList = ArrayList<Medicine>()
     fun getLastMedicines(onMedicineRemoteReadyCallback: OnLastMedicineRemoteReadyCallback) {
         arrayList.clear()
-        NetworkService.instance().last.enqueue(object : Callback<Medicines> {
-            override fun onFailure(call: Call<Medicines>, t: Throwable) {
+        NetworkService.instance().last.enqueue(object : Callback<LastMedicines> {
+            override fun onFailure(call: Call<LastMedicines>, t: Throwable) {
                 t.printStackTrace()
             }
 
             override fun onResponse(
-                call: Call<Medicines>,
-                response: Response<Medicines>
+                call: Call<LastMedicines>,
+                response: Response<LastMedicines>
             ) {
                 Log.i("NetworkService", "onResponse called")
                 response.body()?.items?.forEach {

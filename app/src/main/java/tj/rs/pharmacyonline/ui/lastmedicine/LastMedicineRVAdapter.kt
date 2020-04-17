@@ -4,6 +4,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import tj.rs.pharmacyonline.R
 import tj.rs.pharmacyonline.data.model.Medicine
 import tj.rs.pharmacyonline.databinding.RvMedicineItemBinding
 
@@ -46,6 +47,12 @@ class LastMedicineRVAdapter(
         RecyclerView.ViewHolder(binding.root) {
         fun bind(medi: Medicine, listener: OnItemClickListener?) {
             binding.medicine = medi
+            if (medi.isFavorite) {
+                binding.ivFavorite.setImageResource(R.drawable.ic_favorite_black_24dp)
+            } else {
+                binding.ivFavorite.setImageResource(R.drawable.ic_favorite_border_black_24dp)
+            }
+
             if (listener != null) {
                 binding.root.setOnClickListener {
                     listener.onItemClick(layoutPosition)
