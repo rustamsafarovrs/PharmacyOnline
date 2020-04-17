@@ -37,7 +37,6 @@ class ProfileFragment : Fragment() {
         myPurchasesView.setOnClickListener {
             findNavController().navigate(R.id.myPurchasesFragment, null, options)
         }
-
     }
 
 }

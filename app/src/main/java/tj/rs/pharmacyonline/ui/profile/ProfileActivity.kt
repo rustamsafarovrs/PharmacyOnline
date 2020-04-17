@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
+import kotlinx.android.synthetic.main.activity_profile.*
 import tj.rs.pharmacyonline.R
 
 class ProfileActivity : AppCompatActivity() {
@@ -18,6 +19,10 @@ class ProfileActivity : AppCompatActivity() {
             if (!navigation.popBackStack()) {
                 this.finish()
             }
+        }
+
+        navigation.addOnDestinationChangedListener { _, destination, _ ->
+            tv_toolbar_title.text = destination.label
         }
     }
 
