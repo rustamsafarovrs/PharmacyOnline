@@ -37,6 +37,12 @@ class ProfileFragment : Fragment() {
         myPurchasesView.setOnClickListener {
             findNavController().navigate(R.id.myPurchasesFragment, null, options)
         }
+
+        val profileSetting = profile_settings_root_view
+        profileSetting.setOnClickListener {
+            findNavController().navigate(R.id.profileSettingsFragment, null, options)
+        }
+
     }
 
 }

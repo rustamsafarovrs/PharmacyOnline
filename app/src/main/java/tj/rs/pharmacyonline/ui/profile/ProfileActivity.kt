@@ -23,6 +23,11 @@ class ProfileActivity : AppCompatActivity() {
 
         navigation.addOnDestinationChangedListener { _, destination, _ ->
             tv_toolbar_title.text = destination.label
+            if (destination.id == R.id.profileFragment) {
+                close.setImageResource(R.drawable.ic_close_black_24dp)
+            } else {
+                close.setImageResource(R.drawable.ic_arrow_back_black_24dp)
+            }
         }
     }
 
