@@ -24,7 +24,7 @@
     <fragment
         android:id="@+id/profileSettingsFragment"
         android:name="tj.rs.pharmacyonline.ui.profile.profilesettings.ProfileSettingsFragment"
-        android:label="profile_settings_fragment"
+        android:label="Изменить профиль"
         tools:layout="@layout/fragment_profile_settings">
         <action
             android:id="@+id/action_profileSettingsFragment_to_editProfileFragment"
@@ -33,6 +33,6 @@
     <fragment
         android:id="@+id/editProfileFragment"
         android:name="tj.rs.pharmacyonline.ui.profile.editprofile.EditProfileFragment"
-        android:label="fragment_edit_profile"
+        android:label="Редактировать профиль"
         tools:layout="@layout/fragment_edit_profile" />
 </navigation>

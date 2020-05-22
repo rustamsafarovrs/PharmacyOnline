@@ -48,9 +48,9 @@
         <Button
             android:id="@+id/mb_refresh"
             android:layout_width="wrap_content"
-            android:textColor="@android:color/black"
             android:layout_height="wrap_content"
             android:text="refresh"
+            android:textColor="@android:color/black"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
