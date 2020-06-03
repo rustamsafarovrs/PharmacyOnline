@@ -37,13 +37,10 @@ class MedicineRemoteDataSource private constructor() {
                     if (it != null)
                         arrayList.add(it)
                 }
+                onMedicineRemoteReadyCallback.onRemoteDataReadyCallback(arrayList)
             }
         })
 
-        Handler().postDelayed(
-            { onMedicineRemoteReadyCallback.onRemoteDataReadyCallback(arrayList) },
-            2000
-        )
     }
 
     fun getMedicine(
