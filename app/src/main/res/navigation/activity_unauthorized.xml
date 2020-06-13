@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_unauthorized"
+    app:startDestination="@id/chooseLoginTypeFragment">
+    <fragment
+        android:id="@+id/chooseLoginTypeFragment"
+        android:name="tj.rs.pharmacyonline.ui.registration.ChooseLoginTypeFragment"
+        android:label="choose_login_type_fragment"
+        tools:layout="@layout/choose_login_type_fragment">
+        <action
+            android:id="@+id/action_chooseLoginTypeFragment_to_registrationFragment"
+            app:destination="@id/registrationFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/registrationFragment"
+        android:name="tj.rs.pharmacyonline.ui.registration.RegistrationFragment"
+        android:label="Введите номер телефона"
+        tools:layout="@layout/registration_fragment">
+        <action
+            android:id="@+id/action_registrationFragment_to_confirmPhoneFragment"
+            app:destination="@id/confirmPhoneFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/confirmPhoneFragment"
+        android:name="tj.rs.pharmacyonline.ui.registration.ConfirmPhoneFragment"
+        android:label="fragment_confirm_phone"
+        tools:layout="@layout/fragment_confirm_phone" />
+
+    <include app:graph="@navigation/navigation_main" />
+
+</navigation>

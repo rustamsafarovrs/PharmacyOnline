@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.navOptions
 import kotlinx.android.synthetic.main.fragment_profile_settings.*
@@ -37,7 +37,7 @@ class ProfileSettingsFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProviders.of(this).get(ProfileSettingsViewModel::class.java)
+        viewModel = ViewModelProvider(this).get(ProfileSettingsViewModel::class.java)
 
         mb_edit_profile.setOnClickListener {
             findNavController().navigate(

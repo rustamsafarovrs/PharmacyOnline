@@ -1,4 +1,4 @@
-package tj.rs.pharmacyonline.ui.main
+package tj.rs.pharmacyonline.ui
 
 import android.os.Bundle
 import android.widget.RelativeLayout
@@ -9,11 +9,11 @@ import androidx.navigation.ui.NavigationUI.setupWithNavController
 import kotlinx.android.synthetic.main.toolbar.*
 import tj.rs.pharmacyonline.R
 
-class MainActivity : AppCompatActivity() {
+class AuthorizedActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_authorized)
 
         val toolbar = toolbar
         val navController = findNavController(R.id.nav_host_fragment)

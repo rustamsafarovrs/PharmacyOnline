@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_splash.xml"
+    app:startDestination="@id/splashFragment">
+
+    <fragment
+        android:id="@+id/splashFragment"
+        android:name="tj.rs.pharmacyonline.ui.splash.SplashFragment"
+        android:label="splash_fragment"
+        tools:layout="@layout/splash_fragment">
+        <action
+            android:id="@+id/action_splashFragment_to_unauthorizedActivity"
+            app:destination="@id/unauthorizedActivity" />
+        <action
+            android:id="@+id/action_splashFragment_to_authorizedActivity"
+            app:destination="@id/authorizedActivity" />
+    </fragment>
+    <activity
+        android:id="@+id/unauthorizedActivity"
+        android:name="tj.rs.pharmacyonline.ui.UnauthorizedActivity"
+        android:label="activity_unauthorized"
+        tools:layout="@layout/activity_unauthorized" />
+    <activity
+        android:id="@+id/authorizedActivity"
+        android:name="tj.rs.pharmacyonline.ui.AuthorizedActivity"
+        android:label="activity_authorized"
+        tools:layout="@layout/activity_authorized" />
+</navigation>

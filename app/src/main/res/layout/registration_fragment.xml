@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".ui.registration.RegistrationFragment">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="tj.rs.pharmacyonline.ui.registration.RegistrationViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/background_dark">
+
+        <LinearLayout
+            android:id="@+id/vg_container"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:background="@color/white"
+            android:orientation="horizontal"
+            android:paddingStart="16dp"
+            app:layout_constraintBottom_toBottomOf="@+id/textInputLayout"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/textInputLayout">
+
+            <ImageView
+                android:id="@+id/iv_icon"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_gravity="center"
+                app:srcCompat="@drawable/tj" />
+
+            <TextView
+                android:id="@+id/tv_code"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="4dp"
+                android:text="+992"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_gravity="center"
+                app:srcCompat="@drawable/ic_baseline_expand_more_24" />
+
+        </LinearLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputLayout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="0dp"
+            android:padding="0dp"
+            android:theme="@style/TextInputLayout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/vg_container"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_phone"
+                style="@style/TextInputLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="0dp"
+                android:digits="0123456789+- ()"
+                android:inputType="number"
+                android:paddingStart="8dp"
+                android:paddingTop="16dp"
+                android:paddingEnd="8dp"
+                android:paddingBottom="16dp"
+                tools:text="(90) 430-84-94" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <View
+            android:id="@+id/dividerView"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/md_grey_400"
+            app:layout_constraintTop_toBottomOf="@id/textInputLayout" />
+
+        <TextView
+            android:id="@+id/tv_error"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_margin="16dp"
+            android:textColor="@color/md_red_900"
+            app:layout_constraintTop_toBottomOf="@id/dividerView" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/bt_confirm_phone_number"
+            style="@style/Widget.MaterialComponents.Button.TextButton.Rectangle"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:enabled="false"
+            android:text="Подтвердить номер"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="parent" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
