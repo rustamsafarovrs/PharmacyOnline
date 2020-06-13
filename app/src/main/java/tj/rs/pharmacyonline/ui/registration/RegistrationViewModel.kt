@@ -14,6 +14,7 @@ class RegistrationViewModel(application: Application) : AndroidViewModel(applica
 
     val emitter = Emitter()
     val domain = MutableLiveData<Int>()
+    var formattedPhone = ""
     val phoneFieldText = MutableLiveData<String>()
     val errorPhoneField = MutableLiveData<String>()
     val requestSmsFieldText = MutableLiveData<String>()
@@ -65,7 +66,7 @@ class RegistrationViewModel(application: Application) : AndroidViewModel(applica
                         when (response.responseCode) {
                             202 -> {
                                 emitter.waitAndExecute(RegistrationFragmentNavigation.OpenAuthorizedActivity())
-                                authenficated()
+                                authenticated()
                             }
                             406 -> {
                                 emitter.emitAndExecute(RegistrationFragmentNavigation.SMSCodeError())
@@ -83,9 +84,13 @@ class RegistrationViewModel(application: Application) : AndroidViewModel(applica
         }
     }
 
-    private fun authenficated() {
+    private fun authenticated() {
         authRepository.setAuthorized(true)
         authRepository.setPhoneNumber(phoneFieldText.value!!)
+    }
+
+    fun getFormattedPhoneNumber(): String {
+        return "+${domain.value.toString()} $formattedPhone"
     }
 
 

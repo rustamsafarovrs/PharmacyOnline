@@ -49,6 +49,7 @@ class RegistrationFragment : Fragment() {
                         formattedValue: String
                     ) {
                         viewModel.phoneFieldText.value = extractedValue
+                        viewModel.formattedPhone = formattedValue
                         bt_confirm_phone_number.isEnabled = maskFilled
                     }
                 }

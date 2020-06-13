@@ -38,8 +38,9 @@ class ConfirmPhoneFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProvider(activity!!).get(RegistrationViewModel::class.java)
+
         val toolbar = (activity as AppCompatActivity?)!!.supportActionBar
-        toolbar?.title = viewModel.phoneFieldText.value
+        toolbar?.title = viewModel.getFormattedPhoneNumber()
 
         observe()
 
@@ -67,7 +68,7 @@ class ConfirmPhoneFragment : Fragment() {
         textView.setOnClickListener {
             MaterialAlertDialogBuilder(this.context!!)
                 .setTitle("Sample SMS Code")
-                .setMessage("904301607 -> 1108\nGMT +00:00")
+                .setMessage("sms code dar vaqti sanai darkhost (GMT +00:00) generatsiya meshavad. ya`ne sanai darkhosti sms 17:00 boshad 1200 sms code meshavad.")
                 .show()
         }
     }

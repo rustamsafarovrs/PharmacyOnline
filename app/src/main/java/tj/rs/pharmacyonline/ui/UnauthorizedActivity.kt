@@ -15,6 +15,8 @@ class UnauthorizedActivity : AppCompatActivity() {
         setContentView(R.layout.activity_unauthorized)
 
         val toolbar = toolbar
+        setSupportActionBar(toolbar)
+
         val navController = findNavController(R.id.nav_host_fragment)
         val appBarConfiguration = AppBarConfiguration(navController.graph)
         NavigationUI.setupWithNavController(toolbar, navController, appBarConfiguration)
