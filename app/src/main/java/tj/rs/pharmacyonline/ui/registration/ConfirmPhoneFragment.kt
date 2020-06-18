@@ -71,6 +71,11 @@ class ConfirmPhoneFragment : Fragment() {
                 .setMessage("sms code dar vaqti sanai darkhost (GMT +00:00) generatsiya meshavad. ya`ne sanai darkhosti sms 17:00 boshad 1200 sms code meshavad.")
                 .show()
         }
+
+        bt_resent_request.setOnClickListener {
+            viewModel.requestSmsCode()
+            showProgressDialog()
+        }
     }
 
     private fun observe() {

@@ -65,7 +65,7 @@ class RegistrationViewModel(application: Application) : AndroidViewModel(applica
                         isLoading.postValue(false)
                         when (response.responseCode) {
                             202 -> {
-                                emitter.waitAndExecute(RegistrationFragmentNavigation.OpenAuthorizedActivity())
+                                emitter.emitAndExecute(RegistrationFragmentNavigation.OpenAuthorizedActivity())
                                 authenticated()
                             }
                             406 -> {

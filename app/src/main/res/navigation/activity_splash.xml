@@ -14,8 +14,8 @@
             android:id="@+id/action_splashFragment_to_unauthorizedActivity"
             app:destination="@id/unauthorizedActivity" />
         <action
-            android:id="@+id/action_splashFragment_to_authorizedActivity"
-            app:destination="@id/authorizedActivity" />
+            android:id="@+id/action_splashFragment_to_bannerFragment"
+            app:destination="@id/bannerFragment" />
     </fragment>
     <activity
         android:id="@+id/unauthorizedActivity"
@@ -27,4 +27,13 @@
         android:name="tj.rs.pharmacyonline.ui.AuthorizedActivity"
         android:label="activity_authorized"
         tools:layout="@layout/activity_authorized" />
+    <fragment
+        android:id="@+id/bannerFragment"
+        android:name="tj.rs.pharmacyonline.ui.banner.BannerFragment"
+        android:label="banner_fragment"
+        tools:layout="@layout/banner_fragment">
+        <action
+            android:id="@+id/action_bannerFragment_to_authorizedActivity"
+            app:destination="@id/authorizedActivity" />
+    </fragment>
 </navigation>

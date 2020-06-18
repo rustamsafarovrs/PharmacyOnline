@@ -13,7 +13,6 @@ import tj.rs.pharmacyonline.network.SignupApi
  * (c) 2020 RS DevTeam. All rights reserved!
  */
 class NetworkService private constructor() {
-    private val BASE_URL = " https://test-android-files.000webhostapp.com/api.pharmacyonline.tj/"
 
     private val loggingInterceptor = run {
         val httpLoggingInterceptor = HttpLoggingInterceptor()
@@ -59,6 +58,7 @@ class NetworkService private constructor() {
         .create(SignupApi::class.java)
 
     companion object {
+        const val BASE_URL = "https://test-android-files.000webhostapp.com/api.pharmacyonline.tj/"
         private val instance = NetworkService()
 
         fun instance(): Api {

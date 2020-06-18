@@ -42,3 +42,5 @@ fun getSlideUpDefaultAnimBuilder(): NavOptions.Builder {
 
     return navBuilder
 }
+
+

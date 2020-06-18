@@ -10,4 +10,9 @@ class SplashActivity : AppCompatActivity() {
         setContentView(R.layout.activity_splash)
 
     }
+
+    override fun onBackPressed() {
+//        super.onBackPressed()
+        //do nothing
+    }
 }

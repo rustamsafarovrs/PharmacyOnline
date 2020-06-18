@@ -3,6 +3,7 @@
     <color name="colorPrimary">#FFFFFF</color>
     <color name="colorPrimaryDark">#B8B8B8</color>
     <color name="colorAccent">#FF395C7D</color>
+    <color name="bannerTVBackground">#4D000000</color>
     <color name="black">#000000</color>
     <color name="descriptionColor">#474747</color>
     <color name="white">#FFFFFF</color>
