@@ -1,4 +1,4 @@
-package tj.rs.pharmacyonline.data.mypurchases
+package tj.rs.pharmacyonline.data.repository.mypurchases
 
 import android.os.Handler
 import retrofit2.Call

@@ -5,8 +5,8 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import tj.rs.pharmacyonline.data.model.Response
 import tj.rs.pharmacyonline.data.preferences.Preferences
-import tj.rs.pharmacyonline.data.signup.AuthRepository
-import tj.rs.pharmacyonline.data.signup.SignupRepository
+import tj.rs.pharmacyonline.data.repository.profile.ProfileRepository
+import tj.rs.pharmacyonline.data.repository.signup.SignupRepository
 import tj.rs.pharmacyonline.modules.NetManager
 import tj.rs.pharmacyonline.utils.event.Emitter
 
@@ -19,7 +19,10 @@ class RegistrationViewModel(application: Application) : AndroidViewModel(applica
     val errorPhoneField = MutableLiveData<String>()
     val requestSmsFieldText = MutableLiveData<String>()
     val signupRepository = SignupRepository()
-    val authRepository = AuthRepository(Preferences(getApplication()))
+    val authRepository =
+        ProfileRepository(
+            Preferences(getApplication())
+        )
     val isLoading = MutableLiveData<Boolean>()
 
     init {
@@ -28,7 +31,7 @@ class RegistrationViewModel(application: Application) : AndroidViewModel(applica
 
     fun requestSmsCode() {
         isLoading.postValue(true)
-        if (NetManager(getApplication()).isConnectedToInternet!!) {
+        if (NetManager(getApplication()).isConnectedToInternet()) {
             if (phoneFieldText.value != null || phoneFieldText.value == "") {
                 signupRepository.requestSmsCode(
                     mapOf("phone_number" to phoneFieldText.value!!),
@@ -55,7 +58,7 @@ class RegistrationViewModel(application: Application) : AndroidViewModel(applica
 
     fun confirmPhone() {
         isLoading.postValue(true)
-        if (NetManager(getApplication()).isConnectedToInternet!!) {
+        if (NetManager(getApplication()).isConnectedToInternet()) {
             signupRepository.confirmPhone(
                 mapOf(
                     "phone_number" to phoneFieldText.value!!,

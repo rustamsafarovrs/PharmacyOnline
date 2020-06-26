@@ -1,4 +1,4 @@
-package tj.rs.pharmacyonline.data.banner
+package tj.rs.pharmacyonline.data.repository.banner
 
 import retrofit2.Call
 import retrofit2.Callback

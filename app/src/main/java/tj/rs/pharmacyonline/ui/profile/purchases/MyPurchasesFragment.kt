@@ -56,7 +56,7 @@ class MyPurchasesFragment : Fragment(), MyPurchasesRVAdapter.OnItemClickListener
     }
 
     private fun showInternetConnection() {
-        if (!viewModel.netManager.isConnectedToInternet!!) {
+        if (!viewModel.netManager.isConnectedToInternet()) {
             Snackbar.make(binding.root, "No internet connection", Snackbar.LENGTH_LONG).show()
         }
     }

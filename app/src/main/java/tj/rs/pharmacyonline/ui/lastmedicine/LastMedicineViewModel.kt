@@ -4,8 +4,8 @@ import android.app.Application
 import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
-import tj.rs.pharmacyonline.data.lastmedicine.MedicineRepository
 import tj.rs.pharmacyonline.data.model.Medicine
+import tj.rs.pharmacyonline.data.repository.lastmedicine.MedicineRepository
 import tj.rs.pharmacyonline.modules.NetManager
 
 /**

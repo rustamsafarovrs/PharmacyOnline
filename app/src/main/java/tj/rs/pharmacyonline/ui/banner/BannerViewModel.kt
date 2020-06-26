@@ -6,8 +6,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.squareup.picasso.Picasso
 import com.squareup.picasso.Target
-import tj.rs.pharmacyonline.data.banner.BannerRepository
 import tj.rs.pharmacyonline.data.model.Banner
+import tj.rs.pharmacyonline.data.repository.banner.BannerRepository
 import tj.rs.pharmacyonline.modules.NetworkService
 
 class BannerViewModel : ViewModel() {

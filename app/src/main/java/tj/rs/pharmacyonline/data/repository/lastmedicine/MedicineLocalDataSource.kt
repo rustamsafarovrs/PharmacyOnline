@@ -1,4 +1,4 @@
-package tj.rs.pharmacyonline.data.lastmedicine
+package tj.rs.pharmacyonline.data.repository.lastmedicine
 
 import android.os.Handler
 import tj.rs.pharmacyonline.data.model.Medicine

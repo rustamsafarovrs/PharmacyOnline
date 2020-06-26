@@ -2,8 +2,11 @@ package tj.rs.pharmacyonline.network
 
 import retrofit2.Call
 import retrofit2.http.Body
+import retrofit2.http.GET
 import retrofit2.http.POST
+import retrofit2.http.QueryMap
 import tj.rs.pharmacyonline.data.model.Response
+import tj.rs.pharmacyonline.data.model.User
 
 /**
  * @author Rustam Safarov (RS)
@@ -11,6 +14,10 @@ import tj.rs.pharmacyonline.data.model.Response
  */
 interface ProfileApi {
 
-    @POST("profile/profile.php")
-    fun profile(@Body params: Map<String, String>): Call<Response>
+    @POST("api/profile/update_profile.php")
+    fun updateProfile(@Body params: Map<String, String>): Call<Response>
+
+    @GET("api/profile/get_profile.php")
+    fun getProfile(@QueryMap params: Map<String, String>): Call<User>
+
 }

@@ -91,7 +91,7 @@ class MainNavFragment : Fragment(), LastMedicineRVAdapter.OnItemClickListener {
     }
 
     private fun showInternetConnection() {
-        if (!lastMedicineViewModel.netManager.isConnectedToInternet!!) {
+        if (!lastMedicineViewModel.netManager.isConnectedToInternet()) {
             Snackbar.make(binding.root, "No internet connection", Snackbar.LENGTH_LONG).show()
         }
     }

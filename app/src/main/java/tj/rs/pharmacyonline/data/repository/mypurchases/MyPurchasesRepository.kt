@@ -1,4 +1,4 @@
-package tj.rs.pharmacyonline.data.mypurchases
+package tj.rs.pharmacyonline.data.repository.mypurchases
 
 import tj.rs.pharmacyonline.data.model.Medicine
 import tj.rs.pharmacyonline.modules.NetManager
@@ -11,7 +11,7 @@ class MyPurchasesRepository(val netManager: NetManager) {
     val remoteDataSource = MyPurchasesRemoteDataSource.instance
 
     fun getMyPurchases(onMyPurchasesReadyCallback: OnMyPurchasesReadyCallback) {
-        netManager.isConnectedToInternet?.let {
+        netManager.isConnectedToInternet().let {
             if (it) {
                 remoteDataSource.getMyPurchases(object : OnMyPurchasesRemoteReadyCallback {
                     override fun onRemoteDataReadyCallback(arrayList: ArrayList<Medicine>) {

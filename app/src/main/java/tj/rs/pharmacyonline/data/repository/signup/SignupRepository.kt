@@ -1,4 +1,4 @@
-package tj.rs.pharmacyonline.data.signup
+package tj.rs.pharmacyonline.data.repository.signup
 
 import retrofit2.Call
 import retrofit2.Callback

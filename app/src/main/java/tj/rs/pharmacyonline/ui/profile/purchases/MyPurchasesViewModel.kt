@@ -4,7 +4,7 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import tj.rs.pharmacyonline.data.model.Medicine
-import tj.rs.pharmacyonline.data.mypurchases.MyPurchasesRepository
+import tj.rs.pharmacyonline.data.repository.mypurchases.MyPurchasesRepository
 import tj.rs.pharmacyonline.modules.NetManager
 
 class MyPurchasesViewModel(application: Application) : AndroidViewModel(application) {
@@ -19,7 +19,7 @@ class MyPurchasesViewModel(application: Application) : AndroidViewModel(applicat
     }
 
     fun loadMyPurchases() {
-        if (!netManager.isConnectedToInternet!!) {
+        if (!netManager.isConnectedToInternet()) {
             noInternetConnection.postValue(true)
         } else {
             isLoading.postValue(true)
@@ -32,6 +32,4 @@ class MyPurchasesViewModel(application: Application) : AndroidViewModel(applicat
             })
         }
     }
-
-
 }

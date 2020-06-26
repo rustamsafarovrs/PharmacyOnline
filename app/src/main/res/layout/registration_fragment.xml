@@ -59,7 +59,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="0dp"
             android:padding="0dp"
-            android:theme="@style/TextInputLayout"
+            style="@style/TextInputLayout"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/vg_container"
             app:layout_constraintTop_toTopOf="parent">

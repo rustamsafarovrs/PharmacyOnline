@@ -1,11 +1,13 @@
 package tj.rs.pharmacyonline.modules
 
+import com.google.gson.GsonBuilder
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import tj.rs.pharmacyonline.network.Api
+import tj.rs.pharmacyonline.network.ProfileApi
 import tj.rs.pharmacyonline.network.SignupApi
 
 /**
@@ -43,31 +45,43 @@ class NetworkService private constructor() {
         .addInterceptor(baseInterceptor)
         .build()
 
+    private val gson = GsonBuilder()
+        .setDateFormat("yyyy-MM-dd HH:mm:ss Z")
+        .create()
+
+    private val converterFactory = GsonConverterFactory.create(gson)
+
     private val service = Retrofit.Builder()
         .baseUrl(BASE_URL)
-        .addConverterFactory(GsonConverterFactory.create())
+        .addConverterFactory(converterFactory)
         .client(client)
         .build()
         .create(Api::class.java)
 
     private val signupService = Retrofit.Builder()
         .baseUrl(BASE_URL)
-        .addConverterFactory(GsonConverterFactory.create())
+        .addConverterFactory(converterFactory)
         .client(client)
         .build()
         .create(SignupApi::class.java)
 
+    private val profileService = Retrofit.Builder()
+        .baseUrl(BASE_URL)
+        .addConverterFactory(converterFactory)
+        .client(client)
+        .build()
+        .create(ProfileApi::class.java)
+
     companion object {
         const val BASE_URL = "https://test-android-files.000webhostapp.com/api.pharmacyonline.tj/"
+
         private val instance = NetworkService()
 
-        fun instance(): Api {
-            return instance.service
-        }
+        fun instance(): Api = instance.service
 
-        fun signupInstance(): SignupApi {
-            return instance.signupService
-        }
+        fun signupInstance(): SignupApi = instance.signupService
+
+        fun profileInstance(): ProfileApi = instance.profileService
     }
 
 }

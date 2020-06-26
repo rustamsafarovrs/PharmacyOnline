@@ -1,4 +1,4 @@
-package tj.rs.pharmacyonline.data.lastmedicine
+package tj.rs.pharmacyonline.data.repository.lastmedicine
 
 import android.util.Log
 import tj.rs.pharmacyonline.data.model.Medicine
@@ -14,7 +14,7 @@ class MedicineRepository(val netManager: NetManager) {
 
 
     fun getLastMedicines(onLastMedicineReadyCallback: OnLastMedicineReadyCallback) {
-        netManager.isConnectedToInternet?.let {
+        netManager.isConnectedToInternet().let {
             if (it) {
                 remoteDataSource.getLastMedicines(object : OnLastMedicineRemoteReadyCallback {
                     override fun onRemoteDataReadyCallback(data: ArrayList<Medicine>) {
@@ -44,7 +44,7 @@ class MedicineRepository(val netManager: NetManager) {
     }
 
     fun getMedicine(id: Int, onMedicineReadyCallback: OnMedicineReadyCallback) {
-        netManager.isConnectedToInternet?.let {
+        netManager.isConnectedToInternet().let {
             if (it) {
                 remoteDataSource.getMedicine(id, object : OnMedicineRemoteReadyCallBack {
                     override fun onRemoteMedicineDataReadyCallback(data: Medicine?) {

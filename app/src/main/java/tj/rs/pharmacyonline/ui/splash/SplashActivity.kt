@@ -12,7 +12,7 @@ class SplashActivity : AppCompatActivity() {
     }
 
     override fun onBackPressed() {
-//        super.onBackPressed()
+        // super.onBackPressed()
         //do nothing
     }
 }
