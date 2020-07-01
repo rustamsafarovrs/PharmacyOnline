@@ -42,6 +42,9 @@ class ProfileSettingsViewModel(application: Application) : AndroidViewModel(appl
         if (data.surname != null && data.surname!!.isNotEmpty()) {
             tmp += data.surname!![0].toString()
         }
+        if (tmp.isNullOrEmpty()) {
+            tmp = data.phoneNumber.substring(0, 2)
+        }
 
         avatar.postValue(tmp)
     }
