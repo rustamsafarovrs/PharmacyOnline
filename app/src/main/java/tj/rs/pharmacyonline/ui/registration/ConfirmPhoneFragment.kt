@@ -16,7 +16,6 @@ import com.redmadrobot.inputmask.MaskedTextChangedListener.Companion.installOn
 import kotlinx.android.synthetic.main.fragment_confirm_phone.*
 import tj.rs.pharmacyonline.R
 import tj.rs.pharmacyonline.ui.AuthorizedActivity
-import tj.rs.pharmacyonline.utils.event.EventObserver
 
 
 class ConfirmPhoneFragment : Fragment() {
@@ -37,7 +36,7 @@ class ConfirmPhoneFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(activity!!).get(RegistrationViewModel::class.java)
+        viewModel = ViewModelProvider(requireActivity()).get(RegistrationViewModel::class.java)
 
         val toolbar = (activity as AppCompatActivity?)!!.supportActionBar
         toolbar?.title = viewModel.getFormattedPhoneNumber()
@@ -66,7 +65,7 @@ class ConfirmPhoneFragment : Fragment() {
         }
 
         textView.setOnClickListener {
-            MaterialAlertDialogBuilder(this.context!!)
+            MaterialAlertDialogBuilder(this.requireContext())
                 .setTitle("Sample SMS Code")
                 .setMessage("sms code dar vaqti sanai darkhost (GMT +00:00) generatsiya meshavad. ya`ne sanai darkhosti sms 17:00 boshad 1200 sms code meshavad.")
                 .show()
@@ -79,15 +78,23 @@ class ConfirmPhoneFragment : Fragment() {
     }
 
     private fun observe() {
-        val registrationFragmentNavigation = EventObserver { event ->
-            when (event) {
-                is RegistrationFragmentNavigation.ShowNetworkError -> showNetworkError()
-                is RegistrationFragmentNavigation.OpenAuthorizedActivity -> openMainActivity()
-                is RegistrationFragmentNavigation.SMSCodeError -> smsCodeError()
+        viewModel.showError.observe(viewLifecycleOwner, Observer {
+            it.getContentIfNotHandled()?.let {
+                showNetworkError(it)
             }
-        }
+        })
 
-        viewModel.emitter.observe(viewLifecycleOwner, registrationFragmentNavigation)
+        viewModel.openAuthorizedActivity.observe(viewLifecycleOwner, Observer {
+            it.getContentIfNotHandled()?.let {
+                openMainActivity()
+            }
+        })
+
+        viewModel.smsCodeError.observe(viewLifecycleOwner, Observer {
+            it.getContentIfNotHandled()?.let {
+                smsCodeError()
+            }
+        })
 
         viewModel.isLoading.observe(viewLifecycleOwner, Observer {
             if (it == false) {
@@ -106,8 +113,8 @@ class ConfirmPhoneFragment : Fragment() {
         activity?.finish()
     }
 
-    private fun showNetworkError() {
-        tv_error.text = "Network Error"
+    private fun showNetworkError(message: String) {
+        tv_error.text = message
     }
 
     private var progressDialog: ProgressDialog? = null

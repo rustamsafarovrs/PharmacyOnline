@@ -22,7 +22,6 @@ import tj.rs.pharmacyonline.data.model.CatalogPhoneCountry
 import tj.rs.pharmacyonline.databinding.RegistrationFragmentBinding
 import tj.rs.pharmacyonline.ui.catalogs.phone.PhoneViewModel
 import tj.rs.pharmacyonline.ui.catalogs.select.SelectCatalogDialog
-import tj.rs.pharmacyonline.utils.event.EventObserver
 import tj.rs.pharmacyonline.utils.getSlideLeftAnimBuilder
 
 
@@ -49,7 +48,7 @@ class RegistrationFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(activity!!).get(RegistrationViewModel::class.java)
+        viewModel = ViewModelProvider(requireActivity()).get(RegistrationViewModel::class.java)
         phoneViewModel = ViewModelProvider(this).get(PhoneViewModel::class.java)
 
         binding.viewModel = viewModel
@@ -89,15 +88,23 @@ class RegistrationFragment : Fragment() {
             }
         })
 
-        val registrationFragmentNavigation = EventObserver { event ->
-            when (event) {
-                is RegistrationFragmentNavigation.ShowNetworkError -> showNetworkError()
-                is RegistrationFragmentNavigation.OpenConfirmFragment -> openConfirmFragment()
-                is RegistrationFragmentNavigation.PhoneError -> phoneError()
+        viewModel.showError.observe(viewLifecycleOwner, Observer {
+            it.getContentIfNotHandled()?.let {
+                showNetworkError(it)
             }
-        }
+        })
 
-        viewModel.emitter.observe(viewLifecycleOwner, registrationFragmentNavigation)
+        viewModel.openConfirmFragment.observe(viewLifecycleOwner, Observer {
+            it.getContentIfNotHandled()?.let {
+                openConfirmFragment()
+            }
+        })
+
+        viewModel.phoneError.observe(viewLifecycleOwner, Observer {
+            it.getContentIfNotHandled()?.let {
+                phoneError()
+            }
+        })
 
 
         phoneViewModel.showSelectCodeCatalog.observe(viewLifecycleOwner, Observer {
@@ -121,8 +128,8 @@ class RegistrationFragment : Fragment() {
         )
     }
 
-    private fun showNetworkError() {
-        Toast.makeText(context, "Network error", Toast.LENGTH_LONG)
+    private fun showNetworkError(message: String) {
+        Toast.makeText(context, message, Toast.LENGTH_LONG)
             .show()
     }
 

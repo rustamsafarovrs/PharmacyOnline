@@ -8,11 +8,10 @@ import tj.rs.pharmacyonline.data.preferences.Preferences
 import tj.rs.pharmacyonline.data.repository.profile.ProfileRepository
 import tj.rs.pharmacyonline.data.repository.signup.SignupRepository
 import tj.rs.pharmacyonline.modules.NetManager
-import tj.rs.pharmacyonline.utils.event.Emitter
+import tj.rs.pharmacyonline.utils.live_data.Event
 
 class RegistrationViewModel(application: Application) : AndroidViewModel(application) {
 
-    val emitter = Emitter()
     val domain = MutableLiveData<Int>()
     var formattedPhone = ""
     val phoneFieldText = MutableLiveData<String>()
@@ -39,22 +38,27 @@ class RegistrationViewModel(application: Application) : AndroidViewModel(applica
                         override fun onRequestDone(response: Response) {
                             isLoading.postValue(false)
                             if (response.responseCode == 201) {
-                                emitter.emitAndExecute(RegistrationFragmentNavigation.OpenConfirmFragment())
+                                openConfirmFragment.postValue(Event(Unit))
                             } else {
-                                emitter.emitAndExecute(RegistrationFragmentNavigation.ShowNetworkError())
+                                showError.postValue(Event(response.message))
                             }
                         }
                     })
             } else {
                 isLoading.postValue(false)
-                emitter.emitAndExecute(RegistrationFragmentNavigation.PhoneError())
+                phoneError.postValue(Event(Unit))
                 errorPhoneField.postValue("Phone number = null")
             }
         } else {
-            emitter.emitAndExecute(RegistrationFragmentNavigation.ShowNetworkError())
+            showError.postValue(Event("Network Error"))
             isLoading.postValue(false)
         }
     }
+
+    val openConfirmFragment = MutableLiveData<Event<Unit>>()
+    val showError = MutableLiveData<Event<String>>()
+    val phoneError = MutableLiveData<Event<Unit>>()
+
 
     fun confirmPhone() {
         isLoading.postValue(true)
@@ -68,24 +72,27 @@ class RegistrationViewModel(application: Application) : AndroidViewModel(applica
                         isLoading.postValue(false)
                         when (response.responseCode) {
                             202 -> {
-                                emitter.emitAndExecute(RegistrationFragmentNavigation.OpenAuthorizedActivity())
+                                openAuthorizedActivity.postValue(Event(Unit))
                                 authenticated()
                             }
                             406 -> {
-                                emitter.emitAndExecute(RegistrationFragmentNavigation.SMSCodeError())
+                                smsCodeError.postValue(Event(Unit))
                             }
                             else -> {
-                                emitter.emitAndExecute(RegistrationFragmentNavigation.ShowNetworkError())
+                                showError.postValue(Event("Network Error"))
                             }
                         }
                     }
                 }
             )
         } else {
-            emitter.emitAndExecute(RegistrationFragmentNavigation.ShowNetworkError())
+            showError.postValue(Event("Network Error"))
             isLoading.postValue(false)
         }
     }
+
+    val openAuthorizedActivity = MutableLiveData<Event<Unit>>()
+    val smsCodeError = MutableLiveData<Event<Unit>>()
 
     private fun authenticated() {
         authRepository.setAuthorized(true)
