@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -14,6 +15,10 @@ import com.redmadrobot.inputmask.MaskedTextChangedListener.Companion.installOn
 import com.redmadrobot.inputmask.MaskedTextChangedListener.ValueListener
 import kotlinx.android.synthetic.main.registration_fragment.*
 import tj.rs.pharmacyonline.R
+import tj.rs.pharmacyonline.data.enums.RequestCodeEnums
+import tj.rs.pharmacyonline.databinding.RegistrationFragmentBinding
+import tj.rs.pharmacyonline.ui.catalogs.phone.PhoneViewModel
+import tj.rs.pharmacyonline.ui.catalogs.select.SelectCatalogDialog
 import tj.rs.pharmacyonline.utils.event.EventObserver
 import tj.rs.pharmacyonline.utils.getSlideLeftAnimBuilder
 
@@ -26,17 +31,25 @@ class RegistrationFragment : Fragment() {
     }
 
     private lateinit var viewModel: RegistrationViewModel
+    private lateinit var phoneViewModel: PhoneViewModel
+    private lateinit var binding: RegistrationFragmentBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.registration_fragment, container, false)
+        binding =
+            DataBindingUtil.inflate(inflater, R.layout.registration_fragment, container, false)
+        return binding.root
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProvider(activity!!).get(RegistrationViewModel::class.java)
+        phoneViewModel = ViewModelProvider(this).get(PhoneViewModel::class.java)
+
+        binding.viewModel = viewModel
+        binding.phoneViewModel = phoneViewModel
 
         val listener =
             installOn(
@@ -81,6 +94,15 @@ class RegistrationFragment : Fragment() {
         }
 
         viewModel.emitter.observe(viewLifecycleOwner, registrationFragmentNavigation)
+
+
+        phoneViewModel.showSelectCodeCatalog.observe(viewLifecycleOwner, Observer {
+            it.getContentIfNotHandled()?.let {
+                val dialog = SelectCatalogDialog.newInstance(it)
+                dialog.setTargetFragment(this, RequestCodeEnums.SELECT_CODE.id)
+                dialog.show(fragmentManager!!, "")
+            }
+        })
     }
 
     private fun phoneError() {

@@ -9,6 +9,10 @@
         <variable
             name="viewModel"
             type="tj.rs.pharmacyonline.ui.registration.RegistrationViewModel" />
+
+        <variable
+            name="phoneViewModel"
+            type="tj.rs.pharmacyonline.ui.catalogs.phone.PhoneViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -16,52 +20,27 @@
         android:layout_height="match_parent"
         android:background="@color/background_dark">
 
-        <LinearLayout
-            android:id="@+id/vg_container"
+
+        <include
+            android:id="@+id/include_phone"
+            layout="@layout/view_catalog_code"
             android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:background="@color/white"
-            android:orientation="horizontal"
-            android:paddingStart="16dp"
+            android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="@+id/textInputLayout"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/textInputLayout">
-
-            <ImageView
-                android:id="@+id/iv_icon"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:layout_gravity="center"
-                app:srcCompat="@drawable/tj" />
-
-            <TextView
-                android:id="@+id/tv_code"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginStart="4dp"
-                android:text="+992"
-                android:textColor="@color/black"
-                android:textSize="16sp"
-                android:textStyle="bold" />
-
-            <ImageView
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:layout_gravity="center"
-                app:srcCompat="@drawable/ic_baseline_expand_more_24" />
-
-        </LinearLayout>
+            app:layout_constraintTop_toTopOf="@+id/textInputLayout"
+            app:layout_constraintVertical_bias="0.52"
+            app:viewModel="@{phoneViewModel}"
+            tools:layout_editor_absoluteX="0dp" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/textInputLayout"
+            style="@style/TextInputLayout"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="0dp"
             android:padding="0dp"
-            style="@style/TextInputLayout"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/vg_container"
+            app:layout_constraintStart_toEndOf="@id/include_phone"
             app:layout_constraintTop_toTopOf="parent">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -90,9 +69,9 @@
             android:id="@+id/tv_error"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="parent"
             android:layout_margin="16dp"
             android:textColor="@color/md_red_900"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/dividerView" />
 
         <com.google.android.material.button.MaterialButton

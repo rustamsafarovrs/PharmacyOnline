@@ -48,7 +48,7 @@ class RegistrationViewModel(application: Application) : AndroidViewModel(applica
             } else {
                 isLoading.postValue(false)
                 emitter.emitAndExecute(RegistrationFragmentNavigation.PhoneError())
-                errorPhoneField.postValue("Phone number =null")
+                errorPhoneField.postValue("Phone number = null")
             }
         } else {
             emitter.emitAndExecute(RegistrationFragmentNavigation.ShowNetworkError())

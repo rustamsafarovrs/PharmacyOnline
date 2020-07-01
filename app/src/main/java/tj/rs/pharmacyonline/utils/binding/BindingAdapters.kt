@@ -1,8 +1,11 @@
 package tj.rs.pharmacyonline.utils.binding
 
 import android.view.View
+import android.widget.ImageView
 import androidx.databinding.BindingAdapter
 import com.google.android.material.textfield.TextInputLayout
+import com.jwang123.flagkit.FlagKit
+import tj.rs.pharmacyonline.R
 
 /**
  * @author Rustam Safarov (RS)
@@ -55,4 +58,20 @@ fun visibleGone(view: View, show: Boolean) {
 @BindingAdapter("visibleInvisible")
 fun visibleInvisible(view: View, show: Boolean) {
     view.visibility = if (show) View.VISIBLE else View.INVISIBLE
+}
+
+@BindingAdapter("bindFlag")
+fun bindFlag(imageView: ImageView, domain: String?) {
+    domain?.let {
+        try {
+            val drawable = FlagKit.drawableWithFlag(
+                imageView.context, it.toLowerCase()
+            )
+            imageView.setImageDrawable(drawable)
+
+        } catch (e: Exception) {
+            e.printStackTrace()
+            imageView.setImageResource(R.color.transparent)
+        }
+    }
 }
