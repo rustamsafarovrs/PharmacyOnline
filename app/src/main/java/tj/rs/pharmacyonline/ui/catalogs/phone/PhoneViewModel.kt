@@ -18,15 +18,23 @@ class PhoneViewModel(app: Application) :
 
     private val repository = CatalogsRepository()
 
+    val catalogPhoneCountry = MutableLiveData<CatalogPhoneCountry>()
+
+    init {
+        catalogPhoneCountry.postValue(CatalogPhoneCountry(domain = "tj", code = "+992"))
+    }
+
     private val _showSelectCodeCatalog = MutableLiveData<Event<List<CatalogPhoneCountry>>>()
     val showSelectCodeCatalog: LiveData<Event<List<CatalogPhoneCountry>>>
         get() = _showSelectCodeCatalog
 
     fun onCodeBtnClick() {
         val data = repository.getPhoneCountries()
-        if (data != null) {
-            _showSelectCodeCatalog.postValue(Event(data))
-        }
+        _showSelectCodeCatalog.postValue(Event(data))
+    }
+
+    fun onCodeSelected(code: CatalogPhoneCountry) {
+        catalogPhoneCountry.postValue(code)
     }
 
 }

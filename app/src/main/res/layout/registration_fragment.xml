@@ -25,12 +25,11 @@
             android:id="@+id/include_phone"
             layout="@layout/view_catalog_code"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             app:layout_constraintBottom_toBottomOf="@+id/textInputLayout"
             app:layout_constraintTop_toTopOf="@+id/textInputLayout"
             app:layout_constraintVertical_bias="0.52"
-            app:viewModel="@{phoneViewModel}"
-            tools:layout_editor_absoluteX="0dp" />
+            app:viewModel="@{phoneViewModel}" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/textInputLayout"

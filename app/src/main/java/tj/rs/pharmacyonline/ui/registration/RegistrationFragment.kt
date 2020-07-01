@@ -1,6 +1,8 @@
 package tj.rs.pharmacyonline.ui.registration
 
+import android.app.Activity
 import android.app.ProgressDialog
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -16,6 +18,7 @@ import com.redmadrobot.inputmask.MaskedTextChangedListener.ValueListener
 import kotlinx.android.synthetic.main.registration_fragment.*
 import tj.rs.pharmacyonline.R
 import tj.rs.pharmacyonline.data.enums.RequestCodeEnums
+import tj.rs.pharmacyonline.data.model.CatalogPhoneCountry
 import tj.rs.pharmacyonline.databinding.RegistrationFragmentBinding
 import tj.rs.pharmacyonline.ui.catalogs.phone.PhoneViewModel
 import tj.rs.pharmacyonline.ui.catalogs.select.SelectCatalogDialog
@@ -40,6 +43,7 @@ class RegistrationFragment : Fragment() {
     ): View? {
         binding =
             DataBindingUtil.inflate(inflater, R.layout.registration_fragment, container, false)
+        binding.lifecycleOwner = this
         return binding.root
     }
 
@@ -132,6 +136,22 @@ class RegistrationFragment : Fragment() {
 
     private fun dismissProgressDialog() {
         progressDialog?.dismiss()
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (resultCode != Activity.RESULT_OK) {
+            return
+        }
+
+        when (requestCode) {
+            RequestCodeEnums.SELECT_CODE.id -> {
+                data?.extras?.let {
+                    var code: CatalogPhoneCountry = it.getParcelable("selectedValue")!!
+                    phoneViewModel.onCodeSelected(code)
+                }
+            }
+        }
     }
 
 }
