@@ -1,14 +1,18 @@
 package tj.rs.pharmacyonline.modules
 
 import com.google.gson.GsonBuilder
-import okhttp3.Interceptor
-import okhttp3.OkHttpClient
+import okhttp3.*
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import tj.rs.pharmacyonline.network.Api
 import tj.rs.pharmacyonline.network.ProfileApi
 import tj.rs.pharmacyonline.network.SignupApi
+import java.net.InetSocketAddress
+import java.net.Proxy
+import java.security.SecureRandom
+import javax.net.ssl.SSLContext
+import javax.net.ssl.TrustManager
 
 /**
  * Created by Rustam Safarov (RS) on 13.04.2020.
@@ -39,10 +43,26 @@ class NetworkService private constructor() {
         return@invoke chain.proceed(request)
     }
 
-    private val client: OkHttpClient = OkHttpClient
-        .Builder()
+    private var proxyPort = 3128
+    private var proxyHost = "10.10.10.96"
+    private val username = "r.safarov"
+    private val password = "android.11"
+
+    private var proxyAuthenticator: Authenticator = object : Authenticator {
+        override fun authenticate(route: Route?, response: Response): Request? {
+            val credential: String = Credentials.basic(username, password)
+            return response.request.newBuilder()
+                .header("Proxy-Authorization", credential)
+                .build()
+        }
+    }
+
+    private var client = OkHttpClient.Builder()
         .addInterceptor(loggingInterceptor)
         .addInterceptor(baseInterceptor)
+        .proxy(Proxy(Proxy.Type.HTTP, InetSocketAddress(proxyHost, proxyPort)))
+        .proxyAuthenticator(proxyAuthenticator)
+        .sslSocketFactory(getFakeSSL().socketFactory, TrustAllX509TrustManager())
         .build()
 
     private val gson = GsonBuilder()
@@ -82,6 +102,16 @@ class NetworkService private constructor() {
         fun signupInstance(): SignupApi = instance.signupService
 
         fun profileInstance(): ProfileApi = instance.profileService
+    }
+
+    private fun getFakeSSL(): SSLContext {
+        val sc = SSLContext.getInstance("TLS")
+        sc.init(
+            null,
+            arrayOf<TrustManager>(TrustAllX509TrustManager()),
+            SecureRandom()
+        )
+        return sc
     }
 
 }
