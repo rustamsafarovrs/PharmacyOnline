@@ -1,7 +1,6 @@
 package tj.rs.pharmacyonline.ui.registration
 
 import android.app.ProgressDialog
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,12 +9,12 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.redmadrobot.inputmask.MaskedTextChangedListener
 import com.redmadrobot.inputmask.MaskedTextChangedListener.Companion.installOn
 import kotlinx.android.synthetic.main.fragment_confirm_phone.*
 import tj.rs.pharmacyonline.R
-import tj.rs.pharmacyonline.ui.AuthorizedActivity
 
 
 class ConfirmPhoneFragment : Fragment() {
@@ -84,9 +83,11 @@ class ConfirmPhoneFragment : Fragment() {
             }
         })
 
-        viewModel.openAuthorizedActivity.observe(viewLifecycleOwner, Observer {
+        viewModel.openPostProfileFragment.observe(viewLifecycleOwner, Observer {
             it.getContentIfNotHandled()?.let {
-                openMainActivity()
+                findNavController().navigate(R.id.postProfileFragment)
+                dismissProgressDialog()
+
             }
         })
 
@@ -107,11 +108,6 @@ class ConfirmPhoneFragment : Fragment() {
         tv_error.text = "SMS code error"
     }
 
-    private fun openMainActivity() {
-        startActivity(Intent(context, AuthorizedActivity::class.java))
-        dismissProgressDialog()
-        activity?.finish()
-    }
 
     private fun showNetworkError(message: String) {
         tv_error.text = message

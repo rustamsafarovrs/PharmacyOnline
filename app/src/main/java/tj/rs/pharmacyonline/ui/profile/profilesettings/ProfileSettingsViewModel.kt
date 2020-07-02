@@ -42,7 +42,7 @@ class ProfileSettingsViewModel(application: Application) : AndroidViewModel(appl
         if (data.surname != null && data.surname!!.isNotEmpty()) {
             tmp += data.surname!![0].toString()
         }
-        if (tmp.isNullOrEmpty()) {
+        if (tmp.isEmpty()) {
             tmp = data.phoneNumber.substring(0, 2)
         }
 

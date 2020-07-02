@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".ui.registration.ChooseLoginTypeFragment">
 
-
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -47,6 +46,7 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_margin="4dp"
                 android:backgroundTint="@color/colorAccent"
+                android:minHeight="55dp"
                 android:text="По номеру телефона"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -57,9 +57,9 @@
                 android:id="@+id/mb_facebook_login"
                 style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                 android:layout_width="0dp"
-                app:rippleColor="@color/rippleColor"
                 android:layout_height="wrap_content"
                 android:layout_margin="4dp"
+                android:minHeight="55dp"
                 android:text=""
                 app:icon="@drawable/facebook"
                 app:iconGravity="textStart"
@@ -69,6 +69,7 @@
                 app:layout_constraintEnd_toStartOf="@+id/guideline"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/mb_login_with_phone_number"
+                app:rippleColor="@color/rippleColor"
                 app:strokeColor="#1877F2" />
 
             <com.google.android.material.button.MaterialButton
@@ -77,9 +78,9 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="4dp"
+                android:minHeight="55dp"
                 android:text=""
                 app:icon="@drawable/ic_vk_social_network_logo"
-                app:rippleColor="@color/rippleColor"
                 app:iconGravity="textStart"
                 app:iconPadding="0dp"
                 app:iconSize="20dp"
@@ -87,6 +88,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/guideline"
                 app:layout_constraintTop_toBottomOf="@id/mb_login_with_phone_number"
+                app:rippleColor="@color/rippleColor"
                 app:strokeColor="#4c75a3" />
 
             <androidx.constraintlayout.widget.Guideline

@@ -68,18 +68,11 @@ class ProfileRepository(private val preferences: Preferences) {
                     call: Call<tj.rs.pharmacyonline.data.model.Response>,
                     retrofitResponse: Response<tj.rs.pharmacyonline.data.model.Response>
                 ) {
-                    if (retrofitResponse.body() != null) {
-                        onUpdateProfileReadyCallback.onUpdateReady(
-                            retrofitResponse.body()!!
-                                .apply { responseCode = retrofitResponse.code() })
-                    } else {
-                        onUpdateProfileReadyCallback.onUpdateReady(
-                            tj.rs.pharmacyonline.data.model.Response()
-                                .apply {
-                                    message = "retrofitResponse = null"
-                                    responseCode = retrofitResponse.code()
-                                })
-                    }
+                    onUpdateProfileReadyCallback.onUpdateReady(
+                        tj.rs.pharmacyonline.data.model.Response().apply {
+                            responseCode = retrofitResponse.code()
+                            message = retrofitResponse.message()
+                        })
                 }
             })
     }

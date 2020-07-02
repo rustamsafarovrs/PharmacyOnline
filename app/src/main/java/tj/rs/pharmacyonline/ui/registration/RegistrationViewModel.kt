@@ -72,8 +72,8 @@ class RegistrationViewModel(application: Application) : AndroidViewModel(applica
                         isLoading.postValue(false)
                         when (response.responseCode) {
                             202 -> {
-                                openAuthorizedActivity.postValue(Event(Unit))
-                                authenticated()
+                                openPostProfileFragment.postValue(Event(Unit))
+                                savePhoneNumber()
                             }
                             406 -> {
                                 smsCodeError.postValue(Event(Unit))
@@ -91,11 +91,10 @@ class RegistrationViewModel(application: Application) : AndroidViewModel(applica
         }
     }
 
-    val openAuthorizedActivity = MutableLiveData<Event<Unit>>()
+    val openPostProfileFragment = MutableLiveData<Event<Unit>>()
     val smsCodeError = MutableLiveData<Event<Unit>>()
 
-    private fun authenticated() {
-        authRepository.setAuthorized(true)
+    private fun savePhoneNumber() {
         authRepository.setPhoneNumber(phoneFieldText.value!!)
     }
 

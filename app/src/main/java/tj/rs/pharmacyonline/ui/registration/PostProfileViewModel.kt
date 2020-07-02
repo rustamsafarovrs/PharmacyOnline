@@ -1,4 +1,4 @@
-package tj.rs.pharmacyonline.ui.profile.editprofile
+package tj.rs.pharmacyonline.ui.registration
 
 import android.app.Application
 import android.os.Handler
@@ -12,12 +12,16 @@ import tj.rs.pharmacyonline.data.preferences.Preferences
 import tj.rs.pharmacyonline.data.repository.profile.ProfileRepository
 import tj.rs.pharmacyonline.utils.live_data.Event
 
-class EditProfileViewModel(application: Application) : AndroidViewModel(application) {
+class PostProfileViewModel(application: Application) : AndroidViewModel(application) {
 
     val profileRepository = ProfileRepository(Preferences(application))
     val user = MutableLiveData(User(phoneNumber = profileRepository.getPhoneNumber()))
     val isLoading = MutableLiveData<Boolean>()
 
+    val authRepository =
+        ProfileRepository(
+            Preferences(getApplication())
+        )
 
     val surnameFieldText = MutableLiveData<String>()
     val addressFieldText = MediatorLiveData<String>()
@@ -50,7 +54,7 @@ class EditProfileViewModel(application: Application) : AndroidViewModel(applicat
         emailFieldText.postValue(data.email)
     }
 
-    val popBack = MutableLiveData<Event<Unit>>()
+    val openMainActivity = MutableLiveData<Event<Unit>>()
 
     val onUpdateErrorHandler = MutableLiveData<Event<String>>()
 
@@ -65,7 +69,8 @@ class EditProfileViewModel(application: Application) : AndroidViewModel(applicat
                         isLoading.postValue(false)
 
                         if (response.responseCode == 202 || response.responseCode == 503) {
-                            popBack.postValue(Event(Unit))
+                            openMainActivity.postValue(Event(Unit))
+                            authSuccess()
                         } else {
                             onUpdateErrorHandler.postValue(Event(response.message))
                         }
@@ -99,6 +104,10 @@ class EditProfileViewModel(application: Application) : AndroidViewModel(applicat
         if (!usernameFieldText.value.isNullOrBlank()) {
             usernameFieldError.postValue(null)
         }
+    }
+
+    fun authSuccess() {
+        authRepository.setAuthorized(true)
     }
 
 }
