@@ -11,6 +11,7 @@ class Preferences(private val context: Context) {
     companion object {
         private const val IS_AUTHORIZED = "authorized"
         private const val PHONE_NUMBER = "phone_number"
+        private const val CODE = "code"
 
     }
 
@@ -39,4 +40,15 @@ class Preferences(private val context: Context) {
     fun getPhoneNumber(): String {
         return shPr.getString(PHONE_NUMBER, "").toString()
     }
+
+    fun setCode(code: Int) {
+        editor.putInt(CODE, code)
+        editor.commit()
+    }
+
+    fun getCode(): Int {
+        return shPr.getInt(CODE, 0)
+    }
+
+
 }

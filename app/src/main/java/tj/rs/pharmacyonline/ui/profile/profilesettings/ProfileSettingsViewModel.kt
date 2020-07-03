@@ -14,7 +14,8 @@ import java.util.*
 class ProfileSettingsViewModel(application: Application) : AndroidViewModel(application) {
 
     val profileRepository = ProfileRepository(Preferences(getApplication()))
-    val user = MutableLiveData(User(phoneNumber = profileRepository.getPhoneNumber()))
+    val user =
+        MutableLiveData(User(profileRepository.getCode(), profileRepository.getPhoneNumber()))
     val isLoading = MutableLiveData<Boolean>()
     var avatar = MutableLiveData("")
     val dateFormatted = MutableLiveData<String>()
@@ -26,7 +27,10 @@ class ProfileSettingsViewModel(application: Application) : AndroidViewModel(appl
     fun loadProfile() {
         isLoading.postValue(true)
         profileRepository.getProfile(
-            mapOf(UserParams.PHONE_NUMBER to user.value!!.phoneNumber),
+            mapOf(
+                UserParams.PHONE_NUMBER to user.value!!.phoneNumber,
+                UserParams.CODE to user.value?.code.toString()
+            ),
             object : ProfileRepository.OnGetProfileReadyCallback {
                 override fun onDataReady(data: User?) {
                     isLoading.postValue(false)
@@ -72,6 +76,7 @@ class ProfileSettingsViewModel(application: Application) : AndroidViewModel(appl
     fun onSignOutBtnClick() {
         profileRepository.setAuthorized(false)
         profileRepository.setPhoneNumber("")
+        profileRepository.setCode(0)
         openSplashActivity.postValue(Event(Unit))
     }
 }

@@ -15,7 +15,8 @@ import tj.rs.pharmacyonline.utils.live_data.Event
 class PostProfileViewModel(application: Application) : AndroidViewModel(application) {
 
     val profileRepository = ProfileRepository(Preferences(application))
-    val user = MutableLiveData(User(phoneNumber = profileRepository.getPhoneNumber()))
+    val user =
+        MutableLiveData(User(profileRepository.getCode(), profileRepository.getPhoneNumber()))
     val isLoading = MutableLiveData<Boolean>()
 
     val authRepository =
@@ -34,7 +35,10 @@ class PostProfileViewModel(application: Application) : AndroidViewModel(applicat
     private fun loadProfile() {
         isLoading.postValue(true)
         profileRepository.getProfile(
-            mapOf(UserParams.PHONE_NUMBER to user.value?.phoneNumber!!),
+            mapOf(
+                UserParams.PHONE_NUMBER to user.value?.phoneNumber!!,
+                UserParams.CODE to user.value?.code.toString()
+            ),
             object : ProfileRepository.OnGetProfileReadyCallback {
                 override fun onDataReady(data: User?) {
                     Handler().postDelayed({ isLoading.postValue(false) }, 1000)
@@ -85,6 +89,7 @@ class PostProfileViewModel(application: Application) : AndroidViewModel(applicat
 
     private fun getParams(): Map<String, String> {
         return mapOf(
+            UserParams.CODE to user.value?.code.toString(),
             UserParams.PHONE_NUMBER to user.value!!.phoneNumber,
             UserParams.USERNAME to usernameFieldText.value.toString(),
             UserParams.SURNAME to surnameFieldText.value.toString(),

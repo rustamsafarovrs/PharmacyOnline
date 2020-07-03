@@ -25,6 +25,12 @@ class ProfileRepository(private val preferences: Preferences) {
 
     fun getPhoneNumber() = preferences.getPhoneNumber()
 
+    fun setCode(code: Int) {
+        preferences.setCode(code)
+    }
+
+    fun getCode() = preferences.getCode()
+
     fun getProfile(
         params: Map<String, String>,
         onGetProfileReadyCallback: OnGetProfileReadyCallback

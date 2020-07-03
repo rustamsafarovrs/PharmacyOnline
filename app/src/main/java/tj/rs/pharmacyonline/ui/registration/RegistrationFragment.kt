@@ -156,6 +156,7 @@ class RegistrationFragment : Fragment() {
                 data?.extras?.let {
                     var code: CatalogPhoneCountry = it.getParcelable("selectedValue")!!
                     phoneViewModel.onCodeSelected(code)
+                    viewModel.code.postValue(code.code?.toInt())
                 }
             }
         }

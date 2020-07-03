@@ -3,6 +3,7 @@ package tj.rs.pharmacyonline.ui.registration
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
+import tj.rs.pharmacyonline.data.const.UserParams
 import tj.rs.pharmacyonline.data.model.Response
 import tj.rs.pharmacyonline.data.preferences.Preferences
 import tj.rs.pharmacyonline.data.repository.profile.ProfileRepository
@@ -12,7 +13,7 @@ import tj.rs.pharmacyonline.utils.live_data.Event
 
 class RegistrationViewModel(application: Application) : AndroidViewModel(application) {
 
-    val domain = MutableLiveData<Int>()
+    val code = MutableLiveData<Int>()
     var formattedPhone = ""
     val phoneFieldText = MutableLiveData<String>()
     val errorPhoneField = MutableLiveData<String>()
@@ -25,7 +26,7 @@ class RegistrationViewModel(application: Application) : AndroidViewModel(applica
     val isLoading = MutableLiveData<Boolean>()
 
     init {
-        domain.postValue(992)
+        code.postValue(992)
     }
 
     fun requestSmsCode() {
@@ -33,7 +34,10 @@ class RegistrationViewModel(application: Application) : AndroidViewModel(applica
         if (NetManager(getApplication()).isConnectedToInternet()) {
             if (phoneFieldText.value != null || phoneFieldText.value == "") {
                 signupRepository.requestSmsCode(
-                    mapOf("phone_number" to phoneFieldText.value!!),
+                    mapOf(
+                        UserParams.PHONE_NUMBER to phoneFieldText.value!!,
+                        UserParams.CODE to code.value.toString()
+                    ),
                     object : SignupRepository.OnRequestSmsCodeReadyCallback {
                         override fun onRequestDone(response: Response) {
                             isLoading.postValue(false)
@@ -65,8 +69,9 @@ class RegistrationViewModel(application: Application) : AndroidViewModel(applica
         if (NetManager(getApplication()).isConnectedToInternet()) {
             signupRepository.confirmPhone(
                 mapOf(
-                    "phone_number" to phoneFieldText.value!!,
-                    "generated_code" to requestSmsFieldText.value!!
+                    UserParams.PHONE_NUMBER to phoneFieldText.value!!,
+                    "generated_code" to requestSmsFieldText.value!!,
+                    UserParams.CODE to code.value.toString()
                 ), object : SignupRepository.OnConfirmPhoneReadyCallback {
                     override fun onConfirmDone(response: Response) {
                         isLoading.postValue(false)
@@ -96,10 +101,11 @@ class RegistrationViewModel(application: Application) : AndroidViewModel(applica
 
     private fun savePhoneNumber() {
         authRepository.setPhoneNumber(phoneFieldText.value!!)
+        authRepository.setCode(code.value!!)
     }
 
     fun getFormattedPhoneNumber(): String {
-        return "+${domain.value.toString()} $formattedPhone"
+        return "+${code.value.toString()} $formattedPhone"
     }
 
 

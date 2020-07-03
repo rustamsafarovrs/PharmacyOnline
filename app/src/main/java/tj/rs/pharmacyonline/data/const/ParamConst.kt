@@ -6,6 +6,7 @@ package tj.rs.pharmacyonline.data.const
  */
 
 object UserParams {
+    const val CODE = "code"
     const val PHONE_NUMBER = "phone_number"
     const val USERNAME = "username"
     const val SURNAME = "surname"

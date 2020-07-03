@@ -55,8 +55,8 @@
                         android:layout_marginTop="30dp"
                         android:background="@drawable/profile_background"
                         android:gravity="center"
-                        android:textAllCaps="true"
                         android:text="@{viewModel.avatar}"
+                        android:textAllCaps="true"
                         android:textColor="@color/white"
                         android:textSize="50sp"
                         android:textStyle="bold"
@@ -186,7 +186,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginEnd="8dp"
-                            android:text="@{viewModel.user.phoneNumber}"
+                            android:text="@{`+` + viewModel.user.code + ` ` + viewModel.user.phoneNumber}"
                             android:textColor="@color/colorAccent"
                             android:textSize="@dimen/tv_size_5"
                             app:layout_constraintBottom_toBottomOf="parent"
@@ -239,14 +239,14 @@
                 </LinearLayout>
 
                 <com.google.android.material.button.MaterialButton
+                    style="@style/Widget.MaterialComponents.Button.TextButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    style="@style/Widget.MaterialComponents.Button.TextButton"
-                    android:paddingStart="0dp"
-                    android:textColor="@color/md_red_900"
-                    android:onClick="@{() -> viewModel.onSignOutBtnClick()}"
                     android:layout_marginTop="50dp"
-                    android:text="ВЫЙТИ" />
+                    android:onClick="@{() -> viewModel.onSignOutBtnClick()}"
+                    android:paddingStart="0dp"
+                    android:text="ВЫЙТИ"
+                    android:textColor="@color/md_red_900" />
             </LinearLayout>
         </androidx.core.widget.NestedScrollView>
 

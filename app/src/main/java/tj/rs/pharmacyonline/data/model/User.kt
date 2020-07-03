@@ -10,8 +10,11 @@ import java.util.*
  */
 
 data class User(
+    @SerializedName(UserParams.CODE)
+    var code: Int,
     @SerializedName(UserParams.PHONE_NUMBER)
     var phoneNumber: String
+
 ) {
     var id: Int? = 0
 
