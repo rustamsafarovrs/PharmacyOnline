@@ -12,6 +12,8 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import tj.rs.pharmacyonline.R
 import tj.rs.pharmacyonline.databinding.FragmentEditProfileBinding
+import tj.rs.pharmacyonline.ui.profile.SharedViewModel
+import tj.rs.pharmacyonline.utils.live_data.Event
 
 
 class EditProfileFragment : Fragment() {
@@ -22,6 +24,7 @@ class EditProfileFragment : Fragment() {
 
     private lateinit var viewModel: EditProfileViewModel
     private lateinit var binding: FragmentEditProfileBinding
+    private lateinit var sharedViewModel: SharedViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -35,6 +38,7 @@ class EditProfileFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProvider(this).get(EditProfileViewModel::class.java)
+        sharedViewModel = ViewModelProvider(requireActivity()).get(SharedViewModel::class.java)
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
 
@@ -45,6 +49,7 @@ class EditProfileFragment : Fragment() {
         viewModel.popBack.observe(viewLifecycleOwner, Observer {
             it.getContentIfNotHandled()?.let {
                 findNavController().popBackStack()
+                sharedViewModel.updateEvent.postValue(Event(viewModel.updatedEvent))
             }
         })
 
@@ -53,6 +58,7 @@ class EditProfileFragment : Fragment() {
                 Toast.makeText(context, it, Toast.LENGTH_LONG).show()
             }
         })
+
     }
 
 }

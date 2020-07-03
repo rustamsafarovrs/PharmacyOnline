@@ -66,6 +66,7 @@ class EditProfileViewModel(application: Application) : AndroidViewModel(applicat
 
                         if (response.responseCode == 202 || response.responseCode == 503) {
                             popBack.postValue(Event(Unit))
+                            updatedEvent = true
                         } else {
                             onUpdateErrorHandler.postValue(Event(response.message))
                         }
@@ -87,6 +88,8 @@ class EditProfileViewModel(application: Application) : AndroidViewModel(applicat
             UserParams.EMAIL to emailFieldText.value.toString()
         )
     }
+
+    var updatedEvent = false
 
     /*
     username field

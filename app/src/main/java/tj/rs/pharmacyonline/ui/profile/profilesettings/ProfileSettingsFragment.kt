@@ -6,12 +6,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.navOptions
 import kotlinx.android.synthetic.main.fragment_profile_settings.*
 import tj.rs.pharmacyonline.R
 import tj.rs.pharmacyonline.databinding.FragmentProfileSettingsBinding
+import tj.rs.pharmacyonline.ui.profile.SharedViewModel
 
 class ProfileSettingsFragment : Fragment() {
 
@@ -53,6 +55,14 @@ class ProfileSettingsFragment : Fragment() {
                 options
             )
         }
-    }
 
+        val sharedViewModel = ViewModelProvider(requireActivity()).get(SharedViewModel::class.java)
+        sharedViewModel.updateEvent.observe(viewLifecycleOwner, Observer {
+            it.getContentIfNotHandled()?.let {
+                if (it) {
+                    viewModel.loadProfile()
+                }
+            }
+        })
+    }
 }

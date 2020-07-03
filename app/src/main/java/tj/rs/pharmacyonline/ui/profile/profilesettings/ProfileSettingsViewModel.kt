@@ -19,6 +19,10 @@ class ProfileSettingsViewModel(application: Application) : AndroidViewModel(appl
     val dateFormatted = MutableLiveData<String>()
 
     init {
+        loadProfile()
+    }
+
+    fun loadProfile() {
         isLoading.postValue(true)
         profileRepository.getProfile(
             mapOf(UserParams.PHONE_NUMBER to user.value!!.phoneNumber),
