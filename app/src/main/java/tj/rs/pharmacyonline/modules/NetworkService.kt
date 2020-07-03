@@ -57,7 +57,12 @@ class NetworkService private constructor() {
         }
     }
 
-    private var client = OkHttpClient.Builder()
+    private val normalClient = OkHttpClient.Builder()
+        .addInterceptor(loggingInterceptor)
+        .addInterceptor(baseInterceptor)
+        .build()
+
+    private var proxyClient = OkHttpClient.Builder()
         .addInterceptor(loggingInterceptor)
         .addInterceptor(baseInterceptor)
         .proxy(Proxy(Proxy.Type.HTTP, InetSocketAddress(proxyHost, proxyPort)))
@@ -71,37 +76,22 @@ class NetworkService private constructor() {
 
     private val converterFactory = GsonConverterFactory.create(gson)
 
-    private val service = Retrofit.Builder()
+    private val retrofitBuilder = Retrofit.Builder()
         .baseUrl(BASE_URL)
         .addConverterFactory(converterFactory)
-        .client(client)
+        .client(normalClient)
         .build()
-        .create(Api::class.java)
-
-    private val signupService = Retrofit.Builder()
-        .baseUrl(BASE_URL)
-        .addConverterFactory(converterFactory)
-        .client(client)
-        .build()
-        .create(SignupApi::class.java)
-
-    private val profileService = Retrofit.Builder()
-        .baseUrl(BASE_URL)
-        .addConverterFactory(converterFactory)
-        .client(client)
-        .build()
-        .create(ProfileApi::class.java)
 
     companion object {
         const val BASE_URL = "https://test-android-files.000webhostapp.com/api.pharmacyonline.tj/"
 
         private val instance = NetworkService()
 
-        fun instance(): Api = instance.service
+        fun instance(): Api = instance.retrofitBuilder.create(Api::class.java)
 
-        fun signupInstance(): SignupApi = instance.signupService
+        fun signupInstance(): SignupApi = instance.retrofitBuilder.create(SignupApi::class.java)
 
-        fun profileInstance(): ProfileApi = instance.profileService
+        fun profileInstance(): ProfileApi = instance.retrofitBuilder.create(ProfileApi::class.java)
     }
 
     private fun getFakeSSL(): SSLContext {
