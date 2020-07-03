@@ -79,7 +79,7 @@ class NetworkService private constructor() {
     private val retrofitBuilder = Retrofit.Builder()
         .baseUrl(BASE_URL)
         .addConverterFactory(converterFactory)
-        .client(normalClient)
+        .client(proxyClient)
         .build()
 
     companion object {
