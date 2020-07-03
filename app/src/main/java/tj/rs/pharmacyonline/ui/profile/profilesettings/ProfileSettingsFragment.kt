@@ -1,6 +1,7 @@
 package tj.rs.pharmacyonline.ui.profile.profilesettings
 
 import android.os.Bundle
+import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -62,6 +63,15 @@ class ProfileSettingsFragment : Fragment() {
                 if (it) {
                     viewModel.loadProfile()
                 }
+            }
+        })
+
+        viewModel.openSplashActivity.observe(viewLifecycleOwner, Observer {
+            it.getContentIfNotHandled()?.let {
+                Handler().postDelayed({
+                    findNavController().navigate(R.id.splashActivity)
+                    requireActivity().finish()
+                }, 1000)
             }
         })
     }

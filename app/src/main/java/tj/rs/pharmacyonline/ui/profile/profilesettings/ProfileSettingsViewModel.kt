@@ -7,6 +7,7 @@ import tj.rs.pharmacyonline.data.const.UserParams
 import tj.rs.pharmacyonline.data.model.User
 import tj.rs.pharmacyonline.data.preferences.Preferences
 import tj.rs.pharmacyonline.data.repository.profile.ProfileRepository
+import tj.rs.pharmacyonline.utils.live_data.Event
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -64,5 +65,13 @@ class ProfileSettingsViewModel(application: Application) : AndroidViewModel(appl
 
             dateFormatted.postValue("с " + dateFormat.format(date))
         }
+    }
+
+    val openSplashActivity = MutableLiveData<Event<Unit>>()
+
+    fun onSignOutBtnClick() {
+        profileRepository.setAuthorized(false)
+        profileRepository.setPhoneNumber("")
+        openSplashActivity.postValue(Event(Unit))
     }
 }

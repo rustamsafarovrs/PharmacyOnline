@@ -29,10 +29,19 @@
         <action
             android:id="@+id/action_profileSettingsFragment_to_editProfileFragment"
             app:destination="@id/editProfileFragment" />
+        <action
+            android:id="@+id/action_profileSettingsFragment_to_splashActivity"
+            app:destination="@id/splashActivity" />
     </fragment>
     <fragment
         android:id="@+id/editProfileFragment"
         android:name="tj.rs.pharmacyonline.ui.profile.editprofile.EditProfileFragment"
         android:label="Редактировать профиль"
         tools:layout="@layout/fragment_edit_profile" />
+    <activity
+        android:id="@+id/splashActivity"
+        android:name="tj.rs.pharmacyonline.ui.splash.SplashActivity"
+        android:label="activity_splash"
+        tools:layout="@layout/activity_splash" />
+
 </navigation>

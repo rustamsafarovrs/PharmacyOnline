@@ -237,6 +237,16 @@
                         android:background="@color/colorPrimaryDark" />
 
                 </LinearLayout>
+
+                <com.google.android.material.button.MaterialButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/Widget.MaterialComponents.Button.TextButton"
+                    android:textColor="@color/md_red_900"
+                    android:onClick="@{() -> viewModel.onSignOutBtnClick()}"
+                    android:layout_marginTop="50dp"
+                    android:layout_marginLeft="8dp"
+                    android:text="ВЫЙТИ" />
             </LinearLayout>
         </androidx.core.widget.NestedScrollView>
 
