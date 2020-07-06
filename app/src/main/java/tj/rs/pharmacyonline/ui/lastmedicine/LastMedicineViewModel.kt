@@ -5,7 +5,9 @@ import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import tj.rs.pharmacyonline.data.model.Medicine
+import tj.rs.pharmacyonline.data.preferences.Preferences
 import tj.rs.pharmacyonline.data.repository.lastmedicine.MedicineRepository
+import tj.rs.pharmacyonline.data.repository.profile.ProfileRepository
 import tj.rs.pharmacyonline.modules.NetManager
 
 /**
@@ -17,6 +19,7 @@ class LastMedicineViewModel(application: Application) : AndroidViewModel(applica
     val lastMedicineRepository = MedicineRepository(netManager)
     val isLoading = MutableLiveData<Boolean>()
     val repository = MutableLiveData<ArrayList<Medicine>>()
+    val authRepository = ProfileRepository(Preferences(application))
 
     init {
         loadLastMedicine()

@@ -1,12 +1,11 @@
 package tj.rs.pharmacyonline.ui.registration
 
-import android.app.ProgressDialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
+import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -15,9 +14,11 @@ import com.redmadrobot.inputmask.MaskedTextChangedListener
 import com.redmadrobot.inputmask.MaskedTextChangedListener.Companion.installOn
 import kotlinx.android.synthetic.main.fragment_confirm_phone.*
 import tj.rs.pharmacyonline.R
+import tj.rs.pharmacyonline.databinding.FragmentConfirmPhoneBinding
+import tj.rs.pharmacyonline.ui_commons.base.BaseFragment
 
 
-class ConfirmPhoneFragment : Fragment() {
+class ConfirmPhoneFragment : BaseFragment() {
 
     companion object {
         fun newInstance() =
@@ -25,17 +26,22 @@ class ConfirmPhoneFragment : Fragment() {
     }
 
     private lateinit var viewModel: RegistrationViewModel
+    private lateinit var binding: FragmentConfirmPhoneBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_confirm_phone, container, false)
+        binding =
+            DataBindingUtil.inflate(inflater, R.layout.fragment_confirm_phone, container, false)
+        binding.lifecycleOwner = this
+        return binding.root
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProvider(requireActivity()).get(RegistrationViewModel::class.java)
+        binding.viewModel = viewModel
 
         val toolbar = (activity as AppCompatActivity?)!!.supportActionBar
         toolbar?.title = viewModel.getFormattedPhoneNumber()
@@ -113,15 +119,4 @@ class ConfirmPhoneFragment : Fragment() {
         tv_error.text = message
     }
 
-    private var progressDialog: ProgressDialog? = null
-
-    private fun showProgressDialog() {
-        if (progressDialog == null || !progressDialog!!.isShowing) {
-            progressDialog = ProgressDialog.show(context, "", "Загрузка", true, false)
-        }
-    }
-
-    private fun dismissProgressDialog() {
-        progressDialog?.dismiss()
-    }
 }

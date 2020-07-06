@@ -1,7 +1,6 @@
 package tj.rs.pharmacyonline.ui.registration
 
 import android.app.Activity
-import android.app.ProgressDialog
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,7 +8,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -22,10 +20,11 @@ import tj.rs.pharmacyonline.data.model.CatalogPhoneCountry
 import tj.rs.pharmacyonline.databinding.RegistrationFragmentBinding
 import tj.rs.pharmacyonline.ui.catalogs.phone.PhoneViewModel
 import tj.rs.pharmacyonline.ui.catalogs.select.SelectCatalogDialog
+import tj.rs.pharmacyonline.ui_commons.base.BaseFragment
 import tj.rs.pharmacyonline.utils.getSlideLeftAnimBuilder
 
 
-class RegistrationFragment : Fragment() {
+class RegistrationFragment : BaseFragment() {
 
     companion object {
         fun newInstance() =
@@ -131,18 +130,6 @@ class RegistrationFragment : Fragment() {
     private fun showNetworkError(message: String) {
         Toast.makeText(context, message, Toast.LENGTH_LONG)
             .show()
-    }
-
-    private var progressDialog: ProgressDialog? = null
-
-    private fun showProgressDialog() {
-        if (progressDialog == null || !progressDialog!!.isShowing) {
-            progressDialog = ProgressDialog.show(context, "", "Загрузка", true, false)
-        }
-    }
-
-    private fun dismissProgressDialog() {
-        progressDialog?.dismiss()
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

@@ -96,4 +96,11 @@ class MainNavFragment : Fragment(), LastMedicineRVAdapter.OnItemClickListener {
         }
     }
 
+    override fun onResume() {
+        super.onResume()
+
+        if (!lastMedicineViewModel.authRepository.getAuthorized()) {
+            activity?.finish()
+        }
+    }
 }
