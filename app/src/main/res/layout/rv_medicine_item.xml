@@ -34,10 +34,11 @@
                 android:layout_width="0dp"
                 android:layout_height="150dp"
                 android:scaleType="centerCrop"
+                app:imageUrl="@{medicine.img}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                android:src="@drawable/medicine" />
+                tools:src="@drawable/medicine" />
 
             <ImageView
                 android:id="@+id/iv_favorite"

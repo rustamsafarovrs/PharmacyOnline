@@ -3,11 +3,13 @@ package tj.rs.pharmacyonline.utils.binding
 import android.view.View
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter
+import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import com.bumptech.glide.Glide
 import com.google.android.material.textfield.TextInputLayout
 import com.jwang123.flagkit.FlagKit
 import tj.rs.pharmacyonline.R
 import tj.rs.pharmacyonline.modules.NetworkService
+
 
 /**
  * @author Rustam Safarov (RS)
@@ -81,9 +83,15 @@ fun bindFlag(imageView: ImageView, domain: String?) {
 @BindingAdapter("imageUrl")
 fun imageUrl(imageView: ImageView?, url: String?) {
 
+    val circularProgressDrawable = CircularProgressDrawable(imageView!!.context)
+    circularProgressDrawable.strokeWidth = 15f
+    circularProgressDrawable.centerRadius = 90f
+    circularProgressDrawable.start()
+
     Glide
         .with(imageView!!.context)
         .load(NetworkService.BASE_URL + "images/" + url)
+        .placeholder(circularProgressDrawable)
         .error(R.drawable.medicine)
         .into(imageView)
 }
