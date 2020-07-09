@@ -21,9 +21,13 @@ class MedicineRemoteDataSource private constructor() {
     }
 
     private val arrayList = ArrayList<Medicine>()
-    fun getLastMedicines(onMedicineRemoteReadyCallback: OnLastMedicineRemoteReadyCallback) {
+    fun getLastMedicines(
+        phoneNumber: String,
+        code: Int,
+        onMedicineRemoteReadyCallback: OnLastMedicineRemoteReadyCallback
+    ) {
         arrayList.clear()
-        NetworkService.instance().last.enqueue(object : Callback<LastMedicines> {
+        NetworkService.instance().last(phoneNumber, code).enqueue(object : Callback<LastMedicines> {
             override fun onFailure(call: Call<LastMedicines>, t: Throwable) {
                 t.printStackTrace()
             }

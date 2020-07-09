@@ -22,7 +22,7 @@ class MyPurchasesRemoteDataSource private constructor() {
 
     fun getMyPurchases(onMyPurchasesRemoteReadyCallback: OnMyPurchasesRemoteReadyCallback) {
         myPurchases.clear()
-        NetworkService.instance().purchases.enqueue(object : Callback<Purchases> {
+        NetworkService.instance().purchases().enqueue(object : Callback<Purchases> {
             override fun onFailure(call: Call<Purchases>, t: Throwable) {
                 t.printStackTrace()
             }

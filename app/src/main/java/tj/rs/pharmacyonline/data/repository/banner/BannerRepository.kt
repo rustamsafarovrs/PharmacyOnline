@@ -14,7 +14,7 @@ import tj.rs.pharmacyonline.modules.NetworkService
 class BannerRepository() {
 
     fun getBanner(onBannerReadyCallback: OnBannerReadyCallback) {
-        NetworkService.instance().banner.enqueue(object : Callback<Banner> {
+        NetworkService.instance().banner().enqueue(object : Callback<Banner> {
             override fun onFailure(call: Call<Banner>, t: Throwable) {
                 onBannerReadyCallback.onBannerReady(Banner(0, false))
             }

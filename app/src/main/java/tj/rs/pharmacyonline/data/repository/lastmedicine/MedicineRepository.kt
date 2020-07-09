@@ -13,20 +13,27 @@ class MedicineRepository(val netManager: NetManager) {
     val remoteDataSource = MedicineRemoteDataSource.instance
 
 
-    fun getLastMedicines(onLastMedicineReadyCallback: OnLastMedicineReadyCallback) {
+    fun getLastMedicines(
+        phoneNumber: String,
+        code: Int,
+        onLastMedicineReadyCallback: OnLastMedicineReadyCallback
+    ) {
         netManager.isConnectedToInternet().let {
             if (it) {
-                remoteDataSource.getLastMedicines(object : OnLastMedicineRemoteReadyCallback {
-                    override fun onRemoteDataReadyCallback(data: ArrayList<Medicine>) {
-                        onLastMedicineReadyCallback.onDataReady(data)
-                        localDataSource.saveLastMedicines(data)
-                        Log.i(
-                            "MedicineRepository",
-                            "getLastMedicines: onDataReadyRemoteDataSource loaded"
-                        )
+                remoteDataSource.getLastMedicines(
+                    phoneNumber,
+                    code,
+                    object : OnLastMedicineRemoteReadyCallback {
+                        override fun onRemoteDataReadyCallback(data: ArrayList<Medicine>) {
+                            onLastMedicineReadyCallback.onDataReady(data)
+                            localDataSource.saveLastMedicines(data)
+                            Log.i(
+                                "MedicineRepository",
+                                "getLastMedicines: onDataReadyRemoteDataSource loaded"
+                            )
 
-                    }
-                })
+                        }
+                    })
             } else {
                 localDataSource.getLastMedicine(object : OnLastMedicineLocalDataReadyCallback {
                     override fun onLocalDataReadyCallback(data: ArrayList<Medicine>) {

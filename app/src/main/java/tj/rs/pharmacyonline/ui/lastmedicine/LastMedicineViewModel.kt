@@ -27,14 +27,17 @@ class LastMedicineViewModel(application: Application) : AndroidViewModel(applica
 
     fun loadLastMedicine() {
         isLoading.postValue(true)
-        lastMedicineRepository.getLastMedicines(object :
-            MedicineRepository.OnLastMedicineReadyCallback {
-            override fun onDataReady(data: ArrayList<Medicine>) {
-                Log.i("LastMedicineViewModel", "getLastMedicine: onDataReady")
-                isLoading.postValue(false)
-                repository.value = data
-            }
-        })
+        lastMedicineRepository.getLastMedicines(
+            authRepository.getPhoneNumber(),
+            authRepository.getCode(),
+            object :
+                MedicineRepository.OnLastMedicineReadyCallback {
+                override fun onDataReady(data: ArrayList<Medicine>) {
+                    Log.i("LastMedicineViewModel", "getLastMedicine: onDataReady")
+                    isLoading.postValue(false)
+                    repository.value = data
+                }
+            })
     }
 
 }

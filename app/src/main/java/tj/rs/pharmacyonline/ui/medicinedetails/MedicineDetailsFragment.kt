@@ -42,7 +42,7 @@ class MedicineDetailsFragment : Fragment() {
 
         viewModel.medicine.observe(viewLifecycleOwner, Observer {
             binding.tvName.text = it.name
-            binding.tvPrice.text = it.price.toString()
+//            binding.tvPrice.text = it.price.toString()
             binding.tvDescription.text = it.desc
         })
 

@@ -3,9 +3,11 @@ package tj.rs.pharmacyonline.utils.binding
 import android.view.View
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter
+import com.bumptech.glide.Glide
 import com.google.android.material.textfield.TextInputLayout
 import com.jwang123.flagkit.FlagKit
 import tj.rs.pharmacyonline.R
+import tj.rs.pharmacyonline.modules.NetworkService
 
 /**
  * @author Rustam Safarov (RS)
@@ -74,4 +76,14 @@ fun bindFlag(imageView: ImageView, domain: String?) {
             imageView.setImageResource(R.color.transparent)
         }
     }
+}
+
+@BindingAdapter("imageUrl")
+fun imageUrl(imageView: ImageView?, url: String?) {
+
+    Glide
+        .with(imageView!!.context)
+        .load(NetworkService.BASE_URL + "images/" + url)
+        .error(R.drawable.medicine)
+        .into(imageView)
 }
