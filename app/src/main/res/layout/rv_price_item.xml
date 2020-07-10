@@ -20,7 +20,7 @@
         android:layout_margin="10dp"
         app:contentPadding="10dp"
         app:cardCornerRadius="6dp"
-        android:layout_width="match_parent"
+        android:layout_width="300dp"
         android:clickable="true"
         android:focusable="true"
         android:onClick="@{() -> recyclerViewItemClickCallback.onRecyclerViewItemClick(price)}"
@@ -95,6 +95,16 @@
                 android:textSize="@dimen/tv_size_4"
                 app:layout_constraintStart_toStartOf="parent"
                 tools:text="tv_department_tell" />
+
+            <ImageView
+                android:id="@+id/iv_best_price"
+                app:srcCompat="@drawable/best_price"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_width="70dp"
+                android:visibility="gone"
+                tools:visibility="visible"
+                android:layout_height="70dp" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -1,6 +1,7 @@
 package tj.rs.pharmacyonline.ui.medicinedetails
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.AsyncListDiffer
@@ -65,7 +66,9 @@ class PriceRVAdapter(val listener: RecyclerViewItemClickCallback) :
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val viewHolder: PriceViewHolder = holder as PriceViewHolder
         viewHolder.bind(differ.currentList[position] as Price)
-
+        if (position == 0) {
+            holder.bestPrice()
+        }
     }
 
     inner class PriceViewHolder(private val binding: RvPriceItemBinding) :
@@ -76,6 +79,10 @@ class PriceRVAdapter(val listener: RecyclerViewItemClickCallback) :
             binding.price = price
             binding.recyclerViewItemClickCallback = listener
             binding.executePendingBindings()
+        }
+
+        fun bestPrice() {
+            binding.ivBestPrice.visibility = View.VISIBLE
         }
 
     }

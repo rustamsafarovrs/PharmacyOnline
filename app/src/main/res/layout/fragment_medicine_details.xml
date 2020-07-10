@@ -124,20 +124,11 @@
                     tools:layout_editor_absoluteX="8dp"
                     tools:text="tv_name" />
 
-                <!--                <TextView-->
-                <!--                    android:id="@+id/tv_price"-->
-                <!--                    android:layout_width="match_parent"-->
-                <!--                    android:layout_height="wrap_content"-->
-                <!--                    android:text="123 TJS"-->
-                <!--                    android:textColor="@android:color/black"-->
-                <!--                    android:textSize="@dimen/tv_size_2"-->
-                <!--                    app:layout_constraintTop_toBottomOf="@id/tv_name"-->
-                <!--                    tools:text="tv_price" />-->
-                <!--                -->
-
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recycler_view"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
                     android:layout_height="wrap_content"
                     app:layout_constraintTop_toBottomOf="@id/tv_name"
                     tools:itemCount="1"
@@ -167,6 +158,7 @@
                 <TextView
                     android:id="@+id/tv_description"
                     android:layout_width="0dp"
+                    android:layout_marginTop="4dp"
                     android:layout_height="wrap_content"
                     android:text="@{viewModel.medicine.desc}"
                     android:textColor="@color/black"
