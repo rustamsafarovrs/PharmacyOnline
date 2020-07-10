@@ -19,6 +19,7 @@ import tj.rs.pharmacyonline.R
 import tj.rs.pharmacyonline.databinding.FragmentMainNavBinding
 import tj.rs.pharmacyonline.ui.lastmedicine.LastMedicineRVAdapter
 import tj.rs.pharmacyonline.ui.lastmedicine.LastMedicineViewModel
+import tj.rs.pharmacyonline.utils.getSlideLeftAnimBuilder
 
 /**
  * A simple [Fragment] subclass.
@@ -57,7 +58,7 @@ class MainNavFragment : Fragment(), LastMedicineRVAdapter.OnItemClickListener {
             MainNavFragmentDirections.actionMainNavFragmentToMedicineDetailsFragment(
                 lastMedicineRVAdapter.getItemByPosition(position).id
             )
-        findNavController().navigate(action, options)
+        findNavController().navigate(action, getSlideLeftAnimBuilder().build())
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

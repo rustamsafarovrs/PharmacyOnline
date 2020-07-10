@@ -6,6 +6,7 @@
     <data>
 
         <import type="android.view.View" />
+        <import type="tj.rs.pharmacyonline.BuildConfig" />
 
         <variable
             name="viewModel"
@@ -235,18 +236,59 @@
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
                         android:background="@color/colorPrimaryDark" />
-
                 </LinearLayout>
 
-                <com.google.android.material.button.MaterialButton
-                    style="@style/Widget.MaterialComponents.Button.TextButton"
+                <TextView
+                    android:layout_marginTop="30dp"
                     android:layout_width="wrap_content"
+                    android:textSize="@dimen/tv_size_5"
+                    android:textColor="@color/black"
+                    android:layout_marginStart="8dp"
                     android:layout_height="wrap_content"
+                    tools:text="tv_version_code"
+                    android:text="@{`Version Code: ` + BuildConfig.VERSION_CODE}" />
+
+                <TextView
+                    android:layout_marginTop="4dp"
+                    android:layout_width="wrap_content"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/tv_size_5"
+                    android:layout_marginStart="8dp"
+                    android:layout_height="wrap_content"
+                    tools:text="tv_version_name"
+                    android:text="@{`Version Name: ` + BuildConfig.VERSION_NAME}" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
                     android:layout_marginTop="50dp"
-                    android:onClick="@{() -> viewModel.onSignOutBtnClick()}"
-                    android:paddingStart="0dp"
-                    android:text="ВЫЙТИ"
-                    android:textColor="@color/md_red_900" />
+                    android:background="@color/colorPrimaryDark" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="46dp"
+                    android:background="@color/white"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:foreground="?attr/selectableItemBackground"
+                    android:onClick="@{() -> viewModel.onSignOutBtnClick()}">
+
+                    <com.google.android.material.button.MaterialButton
+                        style="@style/Widget.MaterialComponents.Button.TextButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingStart="0dp"
+                        android:text="ВЫЙТИ"
+                        android:textColor="@color/md_red_900"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/colorPrimaryDark" />
             </LinearLayout>
         </androidx.core.widget.NestedScrollView>
 
