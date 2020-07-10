@@ -6,7 +6,10 @@ import androidx.databinding.ObservableField
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import tj.rs.pharmacyonline.data.model.Medicine
+import tj.rs.pharmacyonline.data.preferences.Preferences
+import tj.rs.pharmacyonline.data.repository.department.DepartmentRepository
 import tj.rs.pharmacyonline.data.repository.lastmedicine.MedicineRepository
+import tj.rs.pharmacyonline.data.repository.profile.ProfileRepository
 import tj.rs.pharmacyonline.modules.NetManager
 
 /**
@@ -17,6 +20,8 @@ class MedicineDetailsFragmentViewModel(application: Application) : AndroidViewMo
     val medicineRepository = MedicineRepository(NetManager(getApplication()))
     val isLoading = ObservableField<Boolean>()
     val medicine = MutableLiveData<Medicine>()
+    val departmentRepository =
+        DepartmentRepository.instance(ProfileRepository(Preferences(application)))
 
     fun setArgs(id: Int) {
         loadMedicine(id)
@@ -25,12 +30,16 @@ class MedicineDetailsFragmentViewModel(application: Application) : AndroidViewMo
     private fun loadMedicine(id: Int) {
         Log.i("MedicineDetails", "loading medicine by id: $id")
         isLoading.set(true)
-        medicineRepository.getMedicine(id, object: MedicineRepository.OnMedicineReadyCallback{
+        medicineRepository.getMedicine(id, object : MedicineRepository.OnMedicineReadyCallback {
             override fun onMedicineDataReady(data: Medicine?) {
                 isLoading.set(false)
-                medicine.value =  data
+                medicine.value = data
             }
         })
+    }
+
+    fun onFavoriteBtnClick() {
+
     }
 
 }

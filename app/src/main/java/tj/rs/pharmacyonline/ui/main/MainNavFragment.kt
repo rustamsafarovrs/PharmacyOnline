@@ -16,7 +16,6 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.snackbar.Snackbar
 import tj.rs.pharmacyonline.R
-import tj.rs.pharmacyonline.data.model.Medicine
 import tj.rs.pharmacyonline.databinding.FragmentMainNavBinding
 import tj.rs.pharmacyonline.ui.lastmedicine.LastMedicineRVAdapter
 import tj.rs.pharmacyonline.ui.lastmedicine.LastMedicineViewModel
@@ -77,7 +76,11 @@ class MainNavFragment : Fragment(), LastMedicineRVAdapter.OnItemClickListener {
 
         lastMedicineViewModel.repository.observe(
             viewLifecycleOwner,
-            Observer<ArrayList<Medicine>> { it?.let { lastMedicineRVAdapter.replaceData(it) } })
+            Observer {
+                it?.let {
+                    lastMedicineRVAdapter.replaceData(it)
+                }
+            })
 
         val button = view.findViewById<MaterialButton>(R.id.mb_refresh)
         button.setOnClickListener {

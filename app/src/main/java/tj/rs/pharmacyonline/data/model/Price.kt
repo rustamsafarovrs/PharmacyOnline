@@ -12,5 +12,6 @@ data class Price(
     val idMedicine: Int,
     @SerializedName("id_department")
     val idDepartment: Int,
+    val department: Department,
     val price: Int
 )

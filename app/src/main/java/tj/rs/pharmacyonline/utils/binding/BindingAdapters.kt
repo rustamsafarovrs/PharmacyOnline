@@ -85,7 +85,7 @@ fun imageUrl(imageView: ImageView?, url: String?) {
 
     val circularProgressDrawable = CircularProgressDrawable(imageView!!.context)
     circularProgressDrawable.strokeWidth = 15f
-    circularProgressDrawable.centerRadius = 90f
+    circularProgressDrawable.centerRadius = 70f
     circularProgressDrawable.start()
 
     Glide
