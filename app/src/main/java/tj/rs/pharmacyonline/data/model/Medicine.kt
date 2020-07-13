@@ -15,5 +15,5 @@ data class Medicine(
     val prices: List<Price>,
     val desc: String,
     val img: String,
-    var isFavorite: Boolean = false
+    var isFavorite: Boolean
 )

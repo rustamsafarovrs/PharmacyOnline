@@ -25,4 +25,7 @@ interface PharmacyDao {
     @Query("SELECT * FROM Medicine")
     fun getAll(): List<Medicine>
 
+    @Query("SELECT * FROM Medicine WHERE id=:id")
+    fun getMedicine(id: Int): Medicine?
+
 }

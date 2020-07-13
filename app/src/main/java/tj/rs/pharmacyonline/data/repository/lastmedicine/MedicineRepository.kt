@@ -26,6 +26,15 @@ class MedicineRepository(val netManager: NetManager, val appDatabase: AppDatabas
                     code,
                     object : OnLastMedicineRemoteReadyCallback {
                         override fun onRemoteDataReadyCallback(data: ArrayList<Medicine>) {
+
+                            // comparing with local data
+                            for (item: Medicine in data) {
+                                val localMedicine = localDataSource.getMedicine(item.id)
+                                localMedicine?.let {
+                                    item.isFavorite = it.isFavorite
+                                }
+                            }
+
                             onLastMedicineReadyCallback.onDataReady(data)
                             localDataSource.saveLastMedicines(data)
                             Log.i(

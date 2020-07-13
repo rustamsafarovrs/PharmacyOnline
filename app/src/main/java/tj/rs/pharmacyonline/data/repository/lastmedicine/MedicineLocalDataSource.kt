@@ -49,6 +49,10 @@ class MedicineLocalDataSource private constructor(private val appDatabase: AppDa
             600
         )
     }
+
+    fun getMedicine(id: Int): Medicine? {
+        return appDatabase.pharmacyDao().getMedicine(id)
+    }
 }
 
 interface OnLastMedicineLocalDataReadyCallback {
