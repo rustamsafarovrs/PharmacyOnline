@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.google.android.material.snackbar.Snackbar
 import tj.rs.pharmacyonline.App
 import tj.rs.pharmacyonline.R
+import tj.rs.pharmacyonline.data.model.Medicine
 import tj.rs.pharmacyonline.databinding.FragmentMainNavBinding
 import tj.rs.pharmacyonline.ui.lastmedicine.LastMedicineRVAdapter
 import tj.rs.pharmacyonline.ui.lastmedicine.LastMedicineViewModel
@@ -24,12 +25,14 @@ import tj.rs.pharmacyonline.utils.view_model.ViewModelFactory
 /**
  * A simple [Fragment] subclass.
  */
-class MainNavFragment : Fragment(), LastMedicineRVAdapter.OnItemClickListener {
+class MainNavFragment : Fragment(), LastMedicineRVAdapter.OnItemClickListener,
+    LastMedicineRVAdapter.OnFavoriteItemClickCallback {
 
     lateinit var binding: FragmentMainNavBinding
     private val lastMedicineRVAdapter =
         LastMedicineRVAdapter(
             arrayListOf(),
+            this,
             this
         )
     lateinit var lastMedicineViewModel: LastMedicineViewModel
@@ -104,6 +107,11 @@ class MainNavFragment : Fragment(), LastMedicineRVAdapter.OnItemClickListener {
         if (!lastMedicineViewModel.netManager.isConnectedToInternet()) {
             Snackbar.make(binding.root, "No internet connection", Snackbar.LENGTH_LONG).show()
         }
+    }
+
+    override fun onClick(medicine: Medicine) {
+        lastMedicineViewModel.isFavorite(medicine)
+        binding.executePendingBindings()
     }
 
     override fun onResume() {

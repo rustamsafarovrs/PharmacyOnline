@@ -11,15 +11,15 @@ import tj.rs.pharmacyonline.data.model.Medicine
 @Dao
 interface PharmacyDao {
     @Insert
-    fun insert(vararg medicine: Medicine)
+    fun insert(medicine: Medicine)
 
     @Update
-    fun update(vararg medicine: Medicine)
+    fun update(medicine: Medicine)
 
     @Delete
-    fun delete(vararg medicine: Medicine)
+    fun delete(medicine: Medicine)
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
     fun insert(data: List<Medicine>)
 
     @Query("SELECT * FROM Medicine")

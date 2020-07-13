@@ -40,4 +40,9 @@ class LastMedicineViewModel(application: App) : AndroidViewModel(application) {
             })
     }
 
+    fun isFavorite(medicine: Medicine) {
+        medicine.isFavorite = !medicine.isFavorite
+        lastMedicineRepository.isFavorite(medicine)
+    }
+
 }

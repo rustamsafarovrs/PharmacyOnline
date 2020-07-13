@@ -45,9 +45,10 @@
                 android:layout_width="35dp"
                 android:layout_height="35dp"
                 android:elevation="2dp"
-                android:foreground="?attr/selectableItemBackgroundBorderless"
+                android:background="?attr/selectableItemBackgroundBorderless"
                 android:padding="4dp"
-                android:src="@drawable/ic_favorite_border_black_24dp"
+                bindFavoriteImage="@{medicine.favorite}"
+                tools:src="@drawable/ic_favorite_border_black_24dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 

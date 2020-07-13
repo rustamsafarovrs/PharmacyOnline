@@ -4,7 +4,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import tj.rs.pharmacyonline.R
 import tj.rs.pharmacyonline.data.model.Medicine
 import tj.rs.pharmacyonline.databinding.RvMedicineItemBinding
 
@@ -14,7 +13,9 @@ import tj.rs.pharmacyonline.databinding.RvMedicineItemBinding
  */
 class LastMedicineRVAdapter(
     private var items: ArrayList<Medicine>,
-    private var listener: OnItemClickListener
+    private var listener: OnItemClickListener,
+    private var favoriteItemClickCallback: OnFavoriteItemClickCallback
+
 ) : RecyclerView.Adapter<LastMedicineRVAdapter.LastMedicineViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): LastMedicineViewHolder {
@@ -24,7 +25,7 @@ class LastMedicineRVAdapter(
     }
 
     override fun onBindViewHolder(holder: LastMedicineViewHolder, position: Int) {
-        holder.bind(items[position], listener)
+        holder.bind(items[position], listener, favoriteItemClickCallback)
     }
 
     override fun getItemCount(): Int {
@@ -43,19 +44,26 @@ class LastMedicineRVAdapter(
         fun onItemClick(position: Int)
     }
 
+    interface OnFavoriteItemClickCallback {
+        fun onClick(medicine: Medicine)
+    }
+
     inner class LastMedicineViewHolder(private var binding: RvMedicineItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(medi: Medicine, listener: OnItemClickListener?) {
+        fun bind(
+            medi: Medicine,
+            listener: OnItemClickListener?,
+            favoriteItemClickCallback: OnFavoriteItemClickCallback
+        ) {
             binding.medicine = medi
-            if (medi.isFavorite) {
-                binding.ivFavorite.setImageResource(R.drawable.ic_favorite_black_24dp)
-            } else {
-                binding.ivFavorite.setImageResource(R.drawable.ic_favorite_border_black_24dp)
-            }
-
             if (listener != null) {
                 binding.root.setOnClickListener {
                     listener.onItemClick(layoutPosition)
+                }
+            }
+            if (favoriteItemClickCallback != null) {
+                binding.ivFavorite.setOnClickListener {
+                    favoriteItemClickCallback.onClick(medi)
                 }
             }
             binding.executePendingBindings()

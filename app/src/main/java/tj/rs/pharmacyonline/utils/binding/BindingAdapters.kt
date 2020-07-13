@@ -95,3 +95,13 @@ fun imageUrl(imageView: ImageView, url: String?) {
         .error(R.drawable.medicine)
         .into(imageView)
 }
+
+@BindingAdapter("bindFavoriteImage")
+fun bindFavoriteImage(imageView: ImageView, boolean: Boolean) {
+    if (boolean) {
+        imageView.setImageDrawable(imageView.context.getDrawable(R.drawable.ic_favorite_black_24dp))
+    } else {
+        imageView.setImageDrawable(imageView.context.getDrawable(R.drawable.ic_favorite_border_black_24dp))
+
+    }
+}
