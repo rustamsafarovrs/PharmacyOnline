@@ -15,10 +15,12 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.PagerSnapHelper
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.fragment_medicine_details.*
+import tj.rs.pharmacyonline.App
 import tj.rs.pharmacyonline.R
 import tj.rs.pharmacyonline.data.model.Price
 import tj.rs.pharmacyonline.databinding.FragmentMedicineDetailsBinding
 import tj.rs.pharmacyonline.ui_commons.RecyclerViewItemClickCallback
+import tj.rs.pharmacyonline.utils.view_model.ViewModelFactory
 
 
 /**
@@ -40,7 +42,12 @@ class MedicineDetailsFragment : Fragment() {
             DataBindingUtil.inflate(inflater, R.layout.fragment_medicine_details, container, false)
         binding.lifecycleOwner = this
 
-        viewModel = ViewModelProvider(this).get(MedicineDetailsFragmentViewModel::class.java)
+        val viewModelFactory = ViewModelFactory(App.getInstance())
+
+        viewModel = ViewModelProvider(
+            this,
+            viewModelFactory
+        ).get(MedicineDetailsFragmentViewModel::class.java)
         viewModel.setArgs(args.id)
         binding.viewModel = viewModel
 

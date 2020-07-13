@@ -2,14 +2,15 @@ package tj.rs.pharmacyonline.data.repository.lastmedicine
 
 import android.util.Log
 import tj.rs.pharmacyonline.data.model.Medicine
+import tj.rs.pharmacyonline.db.AppDatabase
 import tj.rs.pharmacyonline.modules.NetManager
 
 /**
  * Created by Rustam Safarov (RS) on 06.04.2020.
  * (c) 2020 RS DevTeam. All rights reserved!
  */
-class MedicineRepository(val netManager: NetManager) {
-    val localDataSource = MedicineLocalDataSource.instance
+class MedicineRepository(val netManager: NetManager, appDatabase: AppDatabase) {
+    val localDataSource = MedicineLocalDataSource.getInstance(appDatabase)
     val remoteDataSource = MedicineRemoteDataSource.instance
 
 

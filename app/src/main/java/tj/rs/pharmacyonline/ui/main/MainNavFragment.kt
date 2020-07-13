@@ -12,13 +12,14 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
-import com.google.android.material.button.MaterialButton
 import com.google.android.material.snackbar.Snackbar
+import tj.rs.pharmacyonline.App
 import tj.rs.pharmacyonline.R
 import tj.rs.pharmacyonline.databinding.FragmentMainNavBinding
 import tj.rs.pharmacyonline.ui.lastmedicine.LastMedicineRVAdapter
 import tj.rs.pharmacyonline.ui.lastmedicine.LastMedicineViewModel
 import tj.rs.pharmacyonline.utils.getSlideLeftAnimBuilder
+import tj.rs.pharmacyonline.utils.view_model.ViewModelFactory
 
 /**
  * A simple [Fragment] subclass.
@@ -52,7 +53,11 @@ class MainNavFragment : Fragment(), LastMedicineRVAdapter.OnItemClickListener {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        lastMedicineViewModel = ViewModelProvider(this).get(LastMedicineViewModel::class.java)
+
+        var viewModelFactory = ViewModelFactory(App.getInstance()!!)
+
+        lastMedicineViewModel =
+            ViewModelProvider(this, viewModelFactory).get(LastMedicineViewModel::class.java)
         binding.lastMedicineViewModel = lastMedicineViewModel
 
         if (resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT) {
@@ -67,6 +72,17 @@ class MainNavFragment : Fragment(), LastMedicineRVAdapter.OnItemClickListener {
 
         binding.includeLastMedicine.repositoryRv.adapter = lastMedicineRVAdapter
 
+        binding.includeLastMedicine.swipeRefreshLayout.setColorSchemeResources(
+            android.R.color.holo_blue_bright,
+            android.R.color.holo_green_light,
+            android.R.color.holo_orange_light,
+            android.R.color.holo_red_light
+        )
+
+        binding.includeLastMedicine.swipeRefreshLayout.setOnRefreshListener {
+            lastMedicineViewModel.loadLastMedicine()
+        }
+
         lastMedicineViewModel.repository.observe(
             viewLifecycleOwner,
             Observer {
@@ -75,14 +91,12 @@ class MainNavFragment : Fragment(), LastMedicineRVAdapter.OnItemClickListener {
                 }
             })
 
-        val button = view.findViewById<MaterialButton>(R.id.mb_refresh)
-        button.setOnClickListener {
-            lastMedicineViewModel.loadLastMedicine()
-        }
         lastMedicineViewModel.isLoading.observe(viewLifecycleOwner, Observer {
             if (it == true) {
                 showInternetConnection()
             }
+
+            binding.includeLastMedicine.swipeRefreshLayout.isRefreshing = it
         })
     }
 

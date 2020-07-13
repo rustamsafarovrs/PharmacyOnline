@@ -1,10 +1,10 @@
 package tj.rs.pharmacyonline.ui.medicinedetails
 
-import android.app.Application
 import android.util.Log
 import androidx.databinding.ObservableField
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
+import tj.rs.pharmacyonline.App
 import tj.rs.pharmacyonline.data.model.Medicine
 import tj.rs.pharmacyonline.data.preferences.Preferences
 import tj.rs.pharmacyonline.data.repository.department.DepartmentRepository
@@ -16,8 +16,8 @@ import tj.rs.pharmacyonline.modules.NetManager
  * Created by Rustam Safarov (RS) on 08.04.2020.
  * (c) 2020 RS DevTeam. All rights reserved!
  */
-class MedicineDetailsFragmentViewModel(application: Application) : AndroidViewModel(application) {
-    val medicineRepository = MedicineRepository(NetManager(getApplication()))
+class MedicineDetailsFragmentViewModel(application: App) : AndroidViewModel(application) {
+    val medicineRepository = MedicineRepository(NetManager(getApplication()), App.getDatabase())
     val isLoading = ObservableField<Boolean>()
     val medicine = MutableLiveData<Medicine>()
     val departmentRepository =
