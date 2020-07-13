@@ -11,7 +11,6 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.navOptions
 import androidx.recyclerview.widget.GridLayoutManager
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.snackbar.Snackbar
@@ -33,15 +32,6 @@ class MainNavFragment : Fragment(), LastMedicineRVAdapter.OnItemClickListener {
             this
         )
     lateinit var lastMedicineViewModel: LastMedicineViewModel
-
-    private val options = navOptions {
-        anim {
-            enter = R.anim.slide_in_right
-            exit = R.anim.slide_out_left
-            popEnter = R.anim.slide_in_left
-            popExit = R.anim.slide_out_right
-        }
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -72,6 +62,8 @@ class MainNavFragment : Fragment(), LastMedicineRVAdapter.OnItemClickListener {
             binding.includeLastMedicine.repositoryRv.layoutManager =
                 GridLayoutManager(requireContext(), 5)
         }
+
+        binding.includeLastMedicine.repositoryRv.setItemViewCacheSize(20)
 
         binding.includeLastMedicine.repositoryRv.adapter = lastMedicineRVAdapter
 

@@ -28,8 +28,8 @@ open class BaseBottomSheetDialogFragment : BottomSheetDialogFragment() {
     * Callback
     **/
     protected fun setBottomSheetCallback(v: View) {
-        var mBottomSheetBehavior = BottomSheetBehavior.from(v.parent as View)
-        mBottomSheetBehavior?.setBottomSheetCallback(mBottomSheetBehaviorCallback)
+        val mBottomSheetBehavior = BottomSheetBehavior.from(v.parent as View)
+        mBottomSheetBehavior.setBottomSheetCallback(mBottomSheetBehaviorCallback)
     }
 
     private val mBottomSheetBehaviorCallback = object : BottomSheetBehavior.BottomSheetCallback() {

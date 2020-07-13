@@ -81,15 +81,15 @@ fun bindFlag(imageView: ImageView, domain: String?) {
 }
 
 @BindingAdapter("imageUrl")
-fun imageUrl(imageView: ImageView?, url: String?) {
+fun imageUrl(imageView: ImageView, url: String?) {
 
-    val circularProgressDrawable = CircularProgressDrawable(imageView!!.context)
+    val circularProgressDrawable = CircularProgressDrawable(imageView.context)
     circularProgressDrawable.strokeWidth = 15f
     circularProgressDrawable.centerRadius = 70f
     circularProgressDrawable.start()
 
     Glide
-        .with(imageView!!.context)
+        .with(imageView.context)
         .load(NetworkService.BASE_URL + "images/" + url)
         .placeholder(circularProgressDrawable)
         .error(R.drawable.medicine)

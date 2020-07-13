@@ -18,7 +18,7 @@ class LastMedicineRVAdapter(
 ) : RecyclerView.Adapter<LastMedicineRVAdapter.LastMedicineViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): LastMedicineViewHolder {
-        val layoutInflater = LayoutInflater.from(parent?.context)
+        val layoutInflater = LayoutInflater.from(parent.context)
         val binding = RvMedicineItemBinding.inflate(layoutInflater, parent, false)
         return LastMedicineViewHolder(binding)
     }
