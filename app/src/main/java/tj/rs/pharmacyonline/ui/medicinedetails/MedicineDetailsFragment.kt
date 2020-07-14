@@ -61,6 +61,10 @@ class MedicineDetailsFragment : Fragment() {
                 }
             }
         }
+
+        override fun onRecyclerViewItemRemoveClick(any: Any) {
+            // bla
+        }
     }
 
     private fun showSnackbar() {

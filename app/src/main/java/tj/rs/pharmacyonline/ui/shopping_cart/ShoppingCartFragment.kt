@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import tj.rs.pharmacyonline.R
@@ -40,6 +41,12 @@ class ShoppingCartFragment : Fragment() {
         binding.viewModel = viewModel
 
         binding.recyclerView.layoutManager = LinearLayoutManager(requireContext())
-        binding.recyclerView.adapter = ShoppingCartRVAdapter(viewModel.list)
+        binding.recyclerView.adapter = ShoppingCartRVAdapter(viewModel.list, viewModel.listener)
+
+        viewModel.notifyDataChanged.observe(viewLifecycleOwner, Observer {
+            it.getContentIfNotHandled()?.let {
+                (binding.recyclerView.adapter as ShoppingCartRVAdapter).notifyDataSetChanged()
+            }
+        })
     }
 }

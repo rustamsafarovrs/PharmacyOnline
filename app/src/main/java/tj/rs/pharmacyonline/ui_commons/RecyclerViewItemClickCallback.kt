@@ -6,4 +6,5 @@ package tj.rs.pharmacyonline.ui_commons
  */
 interface RecyclerViewItemClickCallback {
     fun onRecyclerViewItemClick(any: Any)
+    fun onRecyclerViewItemRemoveClick(any: Any)
 }
