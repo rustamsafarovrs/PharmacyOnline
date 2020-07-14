@@ -26,6 +26,17 @@ class ShoppingCartViewModel : ViewModel() {
             medicine.isFavorite
         )
         list.add(newItem)
+        initBla()
+    }
+
+    private fun initBla() {
+        var summ = 0
+
+        list.forEach {
+            summ = summ.plus(it.price.price)
+        }
+
+        bla.postValue(summ)
     }
 
     val openShoppingCardFragment = MutableLiveData<Event<Unit>>()
@@ -37,5 +48,7 @@ class ShoppingCartViewModel : ViewModel() {
     fun deleteLastItem() {
         list.removeAt(list.size - 1)
     }
+
+    val bla = MutableLiveData(0)
 
 }

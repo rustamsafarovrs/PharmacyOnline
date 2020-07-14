@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import tj.rs.pharmacyonline.data.model.MedicineCart
 import tj.rs.pharmacyonline.databinding.RvMedicineCartItemBinding
+import tj.rs.pharmacyonline.databinding.RvShoppingCartFooterBinding
 
 /**
  * Created by Rustam Safarov (RS) on 07.04.2020.
@@ -13,21 +14,50 @@ import tj.rs.pharmacyonline.databinding.RvMedicineCartItemBinding
  */
 class ShoppingCartRVAdapter(
     private var items: ArrayList<MedicineCart>
-) : RecyclerView.Adapter<ShoppingCartRVAdapter.ShoppingCartViewHolder>() {
+) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ShoppingCartViewHolder {
+    private val VIEW_TYPE_FOOTER: Int = 0
+    private val VIEW_TYPE_CELL: Int = 1
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
-        val binding = RvMedicineCartItemBinding.inflate(layoutInflater, parent, false)
-        return ShoppingCartViewHolder(binding)
+        return when (viewType) {
+            VIEW_TYPE_CELL -> {
+                val binding = RvMedicineCartItemBinding.inflate(layoutInflater, parent, false)
+                ShoppingCartViewHolder(binding)
+            }
+            VIEW_TYPE_FOOTER -> {
+                val binding = RvShoppingCartFooterBinding.inflate(layoutInflater, parent, false)
+                ShoppingCartFooterViewHolder(binding)
+            }
+            else -> {
+                throw IllegalStateException("Incorrect ViewType found")
+            }
+        }
+
     }
 
-    override fun onBindViewHolder(holder: ShoppingCartViewHolder, position: Int) {
-        holder.bind(items[position])
+    override fun getItemViewType(position: Int): Int {
+        return if (position == items.size) VIEW_TYPE_FOOTER else VIEW_TYPE_CELL
+    }
+
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+        when (holder.itemViewType) {
+            VIEW_TYPE_CELL -> {
+                var viewHolder = holder as ShoppingCartViewHolder
+                viewHolder.bind(items[position])
+            }
+            VIEW_TYPE_FOOTER -> {
+                var viewHolder = holder as ShoppingCartFooterViewHolder
+                viewHolder.bind()
+            }
+        }
     }
 
     override fun getItemCount(): Int {
         Log.i("LastMedicineRVAdapter", "size:" + items.size)
-        return items.size
+        var count = items.size
+        return ++count
     }
 
     fun submitList(list: ArrayList<MedicineCart>) {
@@ -42,6 +72,14 @@ class ShoppingCartRVAdapter(
         ) {
             binding.medicine = medicineCart
 
+            binding.executePendingBindings()
+        }
+
+    }
+
+    inner class ShoppingCartFooterViewHolder(private var binding: RvShoppingCartFooterBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+        fun bind() {
             binding.executePendingBindings()
         }
 

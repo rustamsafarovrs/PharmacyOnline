@@ -43,26 +43,6 @@ class MedicineDetailsFragment : Fragment() {
             DataBindingUtil.inflate(inflater, R.layout.fragment_medicine_details, container, false)
         binding.lifecycleOwner = this
 
-        val viewModelFactory = ViewModelFactory(App.getInstance())
-
-        viewModel = ViewModelProvider(
-            this,
-            viewModelFactory
-        ).get(MedicineDetailsFragmentViewModel::class.java)
-        viewModel.setArgs(args.id)
-        binding.viewModel = viewModel
-
-        shoppingCartViewModel =
-            ViewModelProvider(requireActivity()).get(ShoppingCartViewModel::class.java)
-
-        binding.executePendingBindings()
-
-        viewModel.medicine.observe(viewLifecycleOwner, Observer {
-            binding.tvName.text = it.name
-//            binding.tvPrice.text = it.price.toString()
-            binding.tvDescription.text = it.desc
-            (binding.recyclerView.adapter as PriceRVAdapter).submitList(it.prices)
-        })
 
         return binding.root
     }
@@ -93,6 +73,27 @@ class MedicineDetailsFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+
+
+        val viewModelFactory = ViewModelFactory(App.getInstance())
+
+        viewModel = ViewModelProvider(
+            this,
+            viewModelFactory
+        ).get(MedicineDetailsFragmentViewModel::class.java)
+        viewModel.setArgs(args.id)
+        binding.viewModel = viewModel
+
+        shoppingCartViewModel =
+            ViewModelProvider(requireActivity()).get(ShoppingCartViewModel::class.java)
+
+        binding.executePendingBindings()
+
+        viewModel.medicine.observe(viewLifecycleOwner, Observer {
+            binding.tvName.text = it.name
+            binding.tvDescription.text = it.desc
+            (binding.recyclerView.adapter as PriceRVAdapter).submitList(it.prices)
+        })
 
         binding.recyclerView.layoutManager =
             LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
