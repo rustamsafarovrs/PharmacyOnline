@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -14,7 +13,6 @@ import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.PagerSnapHelper
 import com.google.android.material.snackbar.Snackbar
-import kotlinx.android.synthetic.main.fragment_medicine_details.*
 import tj.rs.pharmacyonline.App
 import tj.rs.pharmacyonline.R
 import tj.rs.pharmacyonline.data.model.Price
@@ -69,19 +67,12 @@ class MedicineDetailsFragment : Fragment() {
         return binding.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        mb_buy.setOnClickListener {
-            Snackbar.make(binding.root, "TODO: Implement this action", Snackbar.LENGTH_SHORT).show()
-        }
-    }
-
     val onRecyclerViewItemClickListener = object : RecyclerViewItemClickCallback {
 
         override fun onRecyclerViewItemClick(any: Any) {
             when (any) {
                 is Price -> {
-                    Toast.makeText(context, "idmedicine ${any.idMedicine}", Toast.LENGTH_LONG)
-                        .show()
+                    showSnackbar()
 
                     val medicine = viewModel.medicine.value
                     medicine?.let {
@@ -90,6 +81,14 @@ class MedicineDetailsFragment : Fragment() {
                 }
             }
         }
+    }
+
+    private fun showSnackbar() {
+        Snackbar.make(binding.root, "Добавлено в корзину", Snackbar.LENGTH_SHORT)
+            .setAction("Отмена") {
+                shoppingCartViewModel.deleteLastItem()
+            }
+            .show()
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {

@@ -10,5 +10,6 @@
     <dimen name="tv_size_8">10sp</dimen>
     <dimen name="dp_0">0dp</dimen>
     <dimen name="dp_16">16dp</dimen>
+    <dimen name="share_icons_dp">46dp</dimen>
 
 </resources>

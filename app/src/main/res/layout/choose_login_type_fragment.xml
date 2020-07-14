@@ -65,12 +65,12 @@
                 app:iconGravity="textStart"
                 app:iconPadding="0dp"
                 app:iconSize="20dp"
-                app:iconTint="#1877F2"
+                app:iconTint="@color/facebook_color"
                 app:layout_constraintEnd_toStartOf="@+id/guideline"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/mb_login_with_phone_number"
                 app:rippleColor="@color/rippleColor"
-                app:strokeColor="#1877F2" />
+                app:strokeColor="@color/facebook_color" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/mb_vk_login"
@@ -84,12 +84,12 @@
                 app:iconGravity="textStart"
                 app:iconPadding="0dp"
                 app:iconSize="20dp"
-                app:iconTint="#4c75a3"
+                app:iconTint="@color/vk_color"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/guideline"
                 app:layout_constraintTop_toBottomOf="@id/mb_login_with_phone_number"
                 app:rippleColor="@color/rippleColor"
-                app:strokeColor="#4c75a3" />
+                app:strokeColor="@color/vk_color" />
 
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/guideline"

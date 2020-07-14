@@ -34,4 +34,8 @@ class ShoppingCartViewModel : ViewModel() {
         openShoppingCardFragment.postValue(Event(Unit))
     }
 
+    fun deleteLastItem() {
+        list.removeAt(list.size - 1)
+    }
+
 }
