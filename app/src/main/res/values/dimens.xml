@@ -5,6 +5,9 @@
     <dimen name="tv_size_3">22sp</dimen>
     <dimen name="tv_size_4">18sp</dimen>
     <dimen name="tv_size_5">16sp</dimen>
+    <dimen name="tv_size_6">14sp</dimen>
+    <dimen name="tv_size_7">12sp</dimen>
+    <dimen name="tv_size_8">10sp</dimen>
     <dimen name="dp_0">0dp</dimen>
     <dimen name="dp_16">16dp</dimen>
 

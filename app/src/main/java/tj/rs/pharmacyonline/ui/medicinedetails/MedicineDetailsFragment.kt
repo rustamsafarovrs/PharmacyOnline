@@ -19,6 +19,7 @@ import tj.rs.pharmacyonline.App
 import tj.rs.pharmacyonline.R
 import tj.rs.pharmacyonline.data.model.Price
 import tj.rs.pharmacyonline.databinding.FragmentMedicineDetailsBinding
+import tj.rs.pharmacyonline.ui.shopping_cart.ShoppingCartViewModel
 import tj.rs.pharmacyonline.ui_commons.RecyclerViewItemClickCallback
 import tj.rs.pharmacyonline.utils.view_model.ViewModelFactory
 
@@ -32,6 +33,8 @@ class MedicineDetailsFragment : Fragment() {
 
     private lateinit var binding: FragmentMedicineDetailsBinding
     private lateinit var viewModel: MedicineDetailsFragmentViewModel
+
+    private lateinit var shoppingCartViewModel: ShoppingCartViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -50,6 +53,9 @@ class MedicineDetailsFragment : Fragment() {
         ).get(MedicineDetailsFragmentViewModel::class.java)
         viewModel.setArgs(args.id)
         binding.viewModel = viewModel
+
+        shoppingCartViewModel =
+            ViewModelProvider(requireActivity()).get(ShoppingCartViewModel::class.java)
 
         binding.executePendingBindings()
 
@@ -76,6 +82,11 @@ class MedicineDetailsFragment : Fragment() {
                 is Price -> {
                     Toast.makeText(context, "idmedicine ${any.idMedicine}", Toast.LENGTH_LONG)
                         .show()
+
+                    val medicine = viewModel.medicine.value
+                    medicine?.let {
+                        shoppingCartViewModel.add(it, any)
+                    }
                 }
             }
         }

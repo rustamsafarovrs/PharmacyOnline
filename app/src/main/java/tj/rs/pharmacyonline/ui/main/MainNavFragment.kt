@@ -35,6 +35,7 @@ class MainNavFragment : Fragment(), LastMedicineRVAdapter.OnItemClickListener,
             this,
             this
         )
+
     lateinit var lastMedicineViewModel: LastMedicineViewModel
 
     override fun onCreateView(
@@ -57,7 +58,7 @@ class MainNavFragment : Fragment(), LastMedicineRVAdapter.OnItemClickListener,
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
-        var viewModelFactory = ViewModelFactory(App.getInstance()!!)
+        val viewModelFactory = ViewModelFactory(App.getInstance())
 
         lastMedicineViewModel =
             ViewModelProvider(this, viewModelFactory).get(LastMedicineViewModel::class.java)
@@ -72,7 +73,6 @@ class MainNavFragment : Fragment(), LastMedicineRVAdapter.OnItemClickListener,
         }
 
         binding.includeLastMedicine.repositoryRv.setItemViewCacheSize(20)
-
         binding.includeLastMedicine.repositoryRv.adapter = lastMedicineRVAdapter
 
         binding.includeLastMedicine.swipeRefreshLayout.setColorSchemeResources(
@@ -98,8 +98,6 @@ class MainNavFragment : Fragment(), LastMedicineRVAdapter.OnItemClickListener,
             if (it == true) {
                 showInternetConnection()
             }
-
-            binding.includeLastMedicine.swipeRefreshLayout.isRefreshing = it
         })
     }
 

@@ -9,18 +9,21 @@
         android:id="@+id/mainNavFragment"
         android:name="tj.rs.pharmacyonline.ui.main.MainNavFragment"
         android:label=""
-        tools:layout="@layout/fragment_main_nav" >
+        tools:layout="@layout/fragment_main_nav">
         <action
             android:id="@+id/action_mainNavFragment_to_medicineDetailsFragment"
             app:destination="@id/medicineDetailsFragment" />
         <action
             android:id="@+id/action_mainNavFragment_to_profileActivity"
             app:destination="@id/profileActivity" />
+        <action
+            android:id="@+id/action_mainNavFragment_to_shoppingCartFragment"
+            app:destination="@id/shoppingCartFragment" />
     </fragment>
     <fragment
         android:id="@+id/medicineDetailsFragment"
         android:name="tj.rs.pharmacyonline.ui.medicinedetails.MedicineDetailsFragment"
-        android:label="" >
+        android:label="">
         <argument
             android:name="id"
             app:argType="integer" />
@@ -30,4 +33,8 @@
         android:name="tj.rs.pharmacyonline.ui.profile.ProfileActivity"
         android:label="activity_profile"
         tools:layout="@layout/activity_profile" />
+    <fragment
+        android:id="@+id/shoppingCartFragment"
+        android:name="tj.rs.pharmacyonline.ui.shopping_cart.ShoppingCartFragment"
+        android:label="ShoppingCartFragment" />
 </navigation>

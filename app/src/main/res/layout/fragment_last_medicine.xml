@@ -32,7 +32,9 @@
 
         <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
             android:id="@+id/swipeRefreshLayout"
+            app:onRefreshListener="@{() -> viewModel.loadLastMedicine()}"
             android:layout_width="match_parent"
+            app:refreshing="@{viewModel.isLoading}"
             android:layout_height="match_parent">
 
             <androidx.recyclerview.widget.RecyclerView
