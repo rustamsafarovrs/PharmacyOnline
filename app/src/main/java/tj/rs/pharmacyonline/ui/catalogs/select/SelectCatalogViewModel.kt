@@ -52,6 +52,10 @@ class SelectCatalogViewModel constructor(app: Application) : AndroidViewModel(ap
                 }
             }
         }
+
+        override fun onRecyclerViewItemRemoveClick(any: Any) {
+            // do nothing
+        }
     }
 
 }
