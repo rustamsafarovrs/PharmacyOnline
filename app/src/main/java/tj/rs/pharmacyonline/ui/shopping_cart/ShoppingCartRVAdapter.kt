@@ -15,7 +15,8 @@ import tj.rs.pharmacyonline.ui_commons.RecyclerViewItemClickCallback
  */
 class ShoppingCartRVAdapter(
     private var items: ArrayList<MedicineCart>,
-    var listener: RecyclerViewItemClickCallback
+    var listener: RecyclerViewItemClickCallback,
+    private val shoppingCartViewModel: ShoppingCartViewModel
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private val VIEW_TYPE_FOOTER: Int = 0
@@ -83,6 +84,7 @@ class ShoppingCartRVAdapter(
     inner class ShoppingCartFooterViewHolder(private var binding: RvShoppingCartFooterBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind() {
+            binding.shoppingCartViewModel = shoppingCartViewModel
             binding.executePendingBindings()
         }
 

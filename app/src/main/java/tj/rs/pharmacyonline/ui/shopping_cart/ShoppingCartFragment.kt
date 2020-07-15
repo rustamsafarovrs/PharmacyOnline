@@ -36,7 +36,8 @@ class ShoppingCartFragment : Fragment() {
         binding.viewModel = viewModel
 
         binding.recyclerView.layoutManager = LinearLayoutManager(requireContext())
-        binding.recyclerView.adapter = ShoppingCartRVAdapter(viewModel.list, viewModel.listener)
+        binding.recyclerView.adapter =
+            ShoppingCartRVAdapter(viewModel.list, viewModel.listener, viewModel)
 
         viewModel.notifyItemRemoved.observe(viewLifecycleOwner, Observer {
             it.getContentIfNotHandled()?.let {
