@@ -1,11 +1,11 @@
 package tj.rs.pharmacyonline.ui.shopping_cart
 
-import androidx.databinding.ObservableArrayList
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import tj.rs.pharmacyonline.data.model.Medicine
 import tj.rs.pharmacyonline.data.model.MedicineCart
 import tj.rs.pharmacyonline.data.model.Price
+import tj.rs.pharmacyonline.data.repository.shopping_cart.ShoppingCartRepository
 import tj.rs.pharmacyonline.ui_commons.RecyclerViewItemClickCallback
 import tj.rs.pharmacyonline.utils.live_data.Event
 
@@ -15,29 +15,12 @@ import tj.rs.pharmacyonline.utils.live_data.Event
  */
 class ShoppingCartViewModel : ViewModel() {
 
-    val list = ObservableArrayList<MedicineCart>()
+    val shoppingCartRepository = ShoppingCartRepository.getInstance()
+
+    val list = shoppingCartRepository.list
 
     fun add(medicine: Medicine, price: Price) {
-        val newItem = MedicineCart(
-            medicine.id,
-            medicine.name,
-            price,
-            medicine.desc,
-            medicine.img,
-            medicine.isFavorite
-        )
-        list.add(newItem)
-        initBla()
-    }
-
-    private fun initBla() {
-        var summ = 0
-
-        list.forEach {
-            summ = summ.plus(it.price.price)
-        }
-
-        bla.postValue(summ)
+        shoppingCartRepository.add(medicine, price)
     }
 
     val openShoppingCardFragment = MutableLiveData<Event<Unit>>()
@@ -50,9 +33,9 @@ class ShoppingCartViewModel : ViewModel() {
         list.removeAt(list.size - 1)
     }
 
-    val bla = MutableLiveData(0)
+    val sum = shoppingCartRepository.sum
 
-    val notifyDataChanged = MutableLiveData<Event<Unit>>()
+    val notifyItemRemoved = MutableLiveData<Event<Int>>()
 
     val listener = object : RecyclerViewItemClickCallback {
         override fun onRecyclerViewItemClick(any: Any) {
@@ -60,8 +43,8 @@ class ShoppingCartViewModel : ViewModel() {
         }
 
         override fun onRecyclerViewItemRemoveClick(any: Any) {
-            list.remove(any as MedicineCart)
-            notifyDataChanged.postValue(Event(Unit))
+            val position = shoppingCartRepository.remove(any as MedicineCart)
+            notifyItemRemoved.postValue(Event(position))
         }
     }
 

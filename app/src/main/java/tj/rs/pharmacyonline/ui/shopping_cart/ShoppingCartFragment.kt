@@ -18,11 +18,6 @@ class ShoppingCartFragment : Fragment() {
     lateinit var viewModel: ShoppingCartViewModel
     lateinit var binding: ShoppingCartFragmentBinding
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -43,9 +38,9 @@ class ShoppingCartFragment : Fragment() {
         binding.recyclerView.layoutManager = LinearLayoutManager(requireContext())
         binding.recyclerView.adapter = ShoppingCartRVAdapter(viewModel.list, viewModel.listener)
 
-        viewModel.notifyDataChanged.observe(viewLifecycleOwner, Observer {
+        viewModel.notifyItemRemoved.observe(viewLifecycleOwner, Observer {
             it.getContentIfNotHandled()?.let {
-                (binding.recyclerView.adapter as ShoppingCartRVAdapter).notifyDataSetChanged()
+                (binding.recyclerView.adapter as ShoppingCartRVAdapter).notifyItemRemoved(it)
             }
         })
     }
