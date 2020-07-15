@@ -1,15 +1,17 @@
 package tj.rs.pharmacyonline.data.model
 
+import tj.rs.pharmacyonline.data.model.base.BaseMedicine
+
 /**
  * Created by Rustam Safarov (RS) on 14.07.2020.
  * (c) 2020 RS DevTeam. All rights reserved!
  */
 
-data class MedicineCart(
-    val id: Int,
-    val name: String,
+class MedicineCart(
+    id: Int,
+    name: String,
     val price: Price,
-    val desc: String,
-    val img: String,
-    var isFavorite: Boolean
-)
+    desc: String,
+    img: String,
+    isFavorite: Boolean
+) : BaseMedicine(id, name, desc, img, isFavorite)

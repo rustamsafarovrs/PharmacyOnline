@@ -1,19 +1,18 @@
 package tj.rs.pharmacyonline.data.model
 
 import androidx.room.Entity
-import androidx.room.PrimaryKey
+import tj.rs.pharmacyonline.data.model.base.BaseMedicine
 
 /**
  * Created by Rustam Safarov (RS) on 06.04.2020.
  * (c) 2020 RS DevTeam. All rights reserved!
  */
 @Entity
-data class Medicine(
-    @PrimaryKey
-    val id: Int,
-    val name: String,
+class Medicine(
+    id: Int,
+    name: String,
     val prices: List<Price>,
-    val desc: String,
-    val img: String,
-    var isFavorite: Boolean
-)
+    desc: String,
+    img: String,
+    isFavorite: Boolean
+) : BaseMedicine(id, name, desc, img, isFavorite)
