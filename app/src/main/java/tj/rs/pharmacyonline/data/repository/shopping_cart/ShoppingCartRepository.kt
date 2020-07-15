@@ -24,7 +24,7 @@ class ShoppingCartRepository private constructor() {
 
     val list = ObservableArrayList<MedicineCart>()
 
-    val sum = MutableLiveData<Int>()
+    val sum = MutableLiveData(0)
 
     fun add(medicine: Medicine, price: Price) {
         val newItem = MedicineCart(
@@ -52,11 +52,11 @@ class ShoppingCartRepository private constructor() {
         for (i in 0 until list.size) {
             if (medicineCart === list[i]) {
                 list.removeAt(i)
+                calculateSum()
                 return i
             }
         }
         return -1
     }
-
 
 }

@@ -33,6 +33,7 @@ class MainNavFragment : Fragment(), LastMedicineRVAdapter.OnItemClickListener,
         LastMedicineRVAdapter(
             arrayListOf(),
             this,
+            this,
             this
         )
 
@@ -45,6 +46,9 @@ class MainNavFragment : Fragment(), LastMedicineRVAdapter.OnItemClickListener,
         binding =
             DataBindingUtil.inflate(inflater, R.layout.fragment_main_nav, container, false)
         binding.lifecycleOwner = this
+
+
+
         return binding.root
     }
 
@@ -56,13 +60,31 @@ class MainNavFragment : Fragment(), LastMedicineRVAdapter.OnItemClickListener,
         findNavController().navigate(action, getSlideLeftAnimBuilder().build())
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    private fun showInternetConnection() {
+        if (!lastMedicineViewModel.netManager.isConnectedToInternet()) {
+            Snackbar.make(binding.root, "No internet connection", Snackbar.LENGTH_LONG).show()
+        }
+    }
+
+    override fun onClick(medicine: Medicine) {
+        lastMedicineViewModel.isFavorite(medicine)
+
+        binding.executePendingBindings()
+    }
+
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
 
         val viewModelFactory = ViewModelFactory(App.getInstance())
 
         lastMedicineViewModel =
             ViewModelProvider(this, viewModelFactory).get(LastMedicineViewModel::class.java)
         binding.lastMedicineViewModel = lastMedicineViewModel
+
+        if (lastMedicineViewModel.repository.value == null) {
+            lastMedicineViewModel.loadLastMedicine()
+        }
 
         if (resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT) {
             binding.includeLastMedicine.repositoryRv.layoutManager =
@@ -99,17 +121,14 @@ class MainNavFragment : Fragment(), LastMedicineRVAdapter.OnItemClickListener,
                 showInternetConnection()
             }
         })
-    }
 
-    private fun showInternetConnection() {
-        if (!lastMedicineViewModel.netManager.isConnectedToInternet()) {
-            Snackbar.make(binding.root, "No internet connection", Snackbar.LENGTH_LONG).show()
-        }
-    }
-
-    override fun onClick(medicine: Medicine) {
-        lastMedicineViewModel.isFavorite(medicine)
-        binding.executePendingBindings()
+        lastMedicineViewModel.notifyItemChanged.observe(viewLifecycleOwner, Observer {
+            it.getContentIfNotHandled()?.let {
+                (binding.includeLastMedicine.repositoryRv.adapter as LastMedicineRVAdapter).notifyItemChanged(
+                    it
+                )
+            }
+        })
     }
 
     override fun onResume() {

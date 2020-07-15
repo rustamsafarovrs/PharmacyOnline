@@ -9,6 +9,7 @@ import tj.rs.pharmacyonline.data.preferences.Preferences
 import tj.rs.pharmacyonline.data.repository.lastmedicine.MedicineRepository
 import tj.rs.pharmacyonline.data.repository.profile.ProfileRepository
 import tj.rs.pharmacyonline.modules.NetManager
+import tj.rs.pharmacyonline.utils.live_data.Event
 
 /**
  * Created by Rustam Safarov (RS) on 06.04.2020.
@@ -20,10 +21,6 @@ class LastMedicineViewModel(application: App) : AndroidViewModel(application) {
     val isLoading = MutableLiveData<Boolean>()
     val repository = MutableLiveData<ArrayList<Medicine>>()
     val authRepository = ProfileRepository(Preferences(application))
-
-    init {
-        loadLastMedicine()
-    }
 
     fun loadLastMedicine() {
         isLoading.postValue(true)
@@ -40,8 +37,18 @@ class LastMedicineViewModel(application: App) : AndroidViewModel(application) {
             })
     }
 
+    val notifyItemChanged = MutableLiveData<Event<Int>>()
+
     fun isFavorite(medicine: Medicine) {
         medicine.isFavorite = !medicine.isFavorite
+        for (i in 0 until repository.value!!.size) {
+            if (medicine === repository.value!![i]) {
+                notifyItemChanged.postValue(Event(i))
+                break
+            }
+        }
+
+
         lastMedicineRepository.isFavorite(medicine)
     }
 

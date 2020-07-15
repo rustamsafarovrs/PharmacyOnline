@@ -3,6 +3,7 @@ package tj.rs.pharmacyonline.ui.lastmedicine
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.lifecycle.LifecycleOwner
 import androidx.recyclerview.widget.RecyclerView
 import tj.rs.pharmacyonline.data.model.Medicine
 import tj.rs.pharmacyonline.databinding.RvMedicineItemBinding
@@ -13,6 +14,7 @@ import tj.rs.pharmacyonline.databinding.RvMedicineItemBinding
  */
 class LastMedicineRVAdapter(
     private var items: ArrayList<Medicine>,
+    val lifecycleOwner: LifecycleOwner,
     private var listener: OnItemClickListener,
     private var favoriteItemClickCallback: OnFavoriteItemClickCallback
 
@@ -55,6 +57,7 @@ class LastMedicineRVAdapter(
             listener: OnItemClickListener?,
             favoriteItemClickCallback: OnFavoriteItemClickCallback
         ) {
+            binding.lifecycleOwner = lifecycleOwner
             binding.medicine = medi
             if (listener != null) {
                 binding.root.setOnClickListener {

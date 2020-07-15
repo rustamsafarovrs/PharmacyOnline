@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI.setupWithNavController
@@ -21,6 +22,7 @@ class AuthorizedActivity : AppCompatActivity() {
     lateinit var binding: ActivityAuthorizedBinding
     lateinit var profileViewModel: ProfileSettingsViewModel
     lateinit var shoppingCartViewModel: ShoppingCartViewModel
+    lateinit var navController: NavController
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,7 +32,7 @@ class AuthorizedActivity : AppCompatActivity() {
         binding.profileViewModel = profileViewModel
 
         val toolbar = toolbar
-        val navController = findNavController(R.id.nav_host_fragment)
+        navController = findNavController(R.id.nav_host_fragment)
         val appBarConfiguration = AppBarConfiguration(navController.graph)
         setupWithNavController(toolbar, navController, appBarConfiguration)
 
@@ -59,4 +61,11 @@ class AuthorizedActivity : AppCompatActivity() {
 
         profileViewModel.loadProfile()
     }
+
+//    override fun onOptionsItemSelected(menuItem: MenuItem): Boolean {
+//        if (menuItem.itemId == android.R.id.home) {
+//            navController.popBackStack()
+//        }
+//        return super.onOptionsItemSelected(menuItem)
+//    }
 }

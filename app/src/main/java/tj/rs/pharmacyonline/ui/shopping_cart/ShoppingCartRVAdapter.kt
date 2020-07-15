@@ -3,6 +3,7 @@ package tj.rs.pharmacyonline.ui.shopping_cart
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.lifecycle.LifecycleOwner
 import androidx.recyclerview.widget.RecyclerView
 import tj.rs.pharmacyonline.data.model.MedicineCart
 import tj.rs.pharmacyonline.databinding.RvMedicineCartItemBinding
@@ -16,7 +17,8 @@ import tj.rs.pharmacyonline.ui_commons.RecyclerViewItemClickCallback
 class ShoppingCartRVAdapter(
     private var items: ArrayList<MedicineCart>,
     var listener: RecyclerViewItemClickCallback,
-    private val shoppingCartViewModel: ShoppingCartViewModel
+    private val shoppingCartViewModel: ShoppingCartViewModel,
+    val lifecycleOwner: LifecycleOwner
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private val VIEW_TYPE_FOOTER: Int = 0
@@ -84,6 +86,7 @@ class ShoppingCartRVAdapter(
     inner class ShoppingCartFooterViewHolder(private var binding: RvShoppingCartFooterBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind() {
+            binding.lifecycleOwner = lifecycleOwner
             binding.shoppingCartViewModel = shoppingCartViewModel
             binding.executePendingBindings()
         }
