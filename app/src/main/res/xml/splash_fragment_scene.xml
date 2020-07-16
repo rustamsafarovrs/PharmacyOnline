@@ -5,7 +5,7 @@
     <Transition
         app:constraintSetEnd="@id/end"
         app:constraintSetStart="@id/start"
-        app:duration="1300">
+        app:duration="1500">
         <KeyFrameSet>
             <KeyAttribute
                 android:rotation="-45"
@@ -44,8 +44,8 @@
     <ConstraintSet android:id="@+id/end">
         <Constraint
             android:id="@+id/iv_app_logo"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
+            android:layout_width="250dp"
+            android:layout_height="250dp"
             android:scaleX="200"
             android:scaleY="200"
             app:layout_constraintBottom_toBottomOf="parent"
