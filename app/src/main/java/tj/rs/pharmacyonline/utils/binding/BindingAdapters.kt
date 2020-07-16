@@ -84,8 +84,8 @@ fun bindFlag(imageView: ImageView, domain: String?) {
 fun imageUrl(imageView: ImageView, url: String?) {
 
     val circularProgressDrawable = CircularProgressDrawable(imageView.context)
-    circularProgressDrawable.strokeWidth = 15f
-    circularProgressDrawable.centerRadius = 70f
+    circularProgressDrawable.strokeWidth = 10f
+    circularProgressDrawable.centerRadius = 30f
     circularProgressDrawable.start()
 
     Glide

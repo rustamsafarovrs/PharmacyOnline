@@ -239,7 +239,7 @@
                 </LinearLayout>
 
                 <TextView
-                    android:layout_marginTop="30dp"
+                    android:layout_marginTop="20dp"
                     android:layout_width="wrap_content"
                     android:textSize="@dimen/tv_size_5"
                     android:textColor="@color/black"
@@ -261,7 +261,7 @@
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:layout_marginTop="50dp"
+                    android:layout_marginTop="40dp"
                     android:background="@color/colorPrimaryDark" />
 
                 <androidx.constraintlayout.widget.ConstraintLayout

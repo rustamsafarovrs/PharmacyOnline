@@ -43,4 +43,13 @@ fun getSlideUpDefaultAnimBuilder(): NavOptions.Builder {
     return navBuilder
 }
 
+fun getFadeOutAnimBuilder(): NavOptions.Builder {
+    val navBuilder = NavOptions.Builder()
 
+    navBuilder.setEnterAnim(R.anim.fade_in)
+    navBuilder.setExitAnim(R.anim.fade_out)
+    navBuilder.setPopEnterAnim(R.anim.nav_default_pop_enter_anim)
+    navBuilder.setPopExitAnim(R.anim.nav_default_pop_exit_anim)
+
+    return navBuilder
+}

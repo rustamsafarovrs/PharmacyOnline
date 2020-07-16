@@ -43,8 +43,8 @@ class NetworkService private constructor() {
         return@invoke chain.proceed(request)
     }
 
-    private var proxyPort = 3128
-    private var proxyHost = "10.10.10.96"
+    private val proxyPort = 3128
+    private val proxyHost = "10.10.10.96"
     private val username = "r.safarov"
     private val password = "android.11"
 
@@ -79,7 +79,7 @@ class NetworkService private constructor() {
     private val retrofitBuilder = Retrofit.Builder()
         .baseUrl(BASE_URL)
         .addConverterFactory(converterFactory)
-        .client(normalClient)
+        .client(proxyClient)
         .build()
 
     companion object {
