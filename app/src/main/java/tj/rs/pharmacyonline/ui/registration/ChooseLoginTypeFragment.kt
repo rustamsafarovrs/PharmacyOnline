@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.choose_login_type_fragment.*
 import tj.rs.pharmacyonline.R
 import tj.rs.pharmacyonline.utils.getSlideLeftAnimBuilder
@@ -32,6 +33,21 @@ class ChooseLoginTypeFragment : Fragment() {
                 R.id.registrationFragment, null,
                 getSlideLeftAnimBuilder().build()
             )
+        }
+
+        mb_facebook_login.setOnClickListener {
+            Snackbar.make(
+                this@ChooseLoginTypeFragment.requireActivity().window.decorView.rootView,
+                "Coming soon...",
+                Snackbar.LENGTH_SHORT
+            ).show()
+        }
+        mb_vk_login.setOnClickListener {
+            Snackbar.make(
+                this@ChooseLoginTypeFragment.requireActivity().window.decorView.rootView,
+                "Coming soon...",
+                Snackbar.LENGTH_SHORT
+            ).show()
         }
     }
 

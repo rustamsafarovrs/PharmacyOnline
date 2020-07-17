@@ -6,6 +6,7 @@
     <data>
 
         <import type="android.view.View" />
+
         <import type="tj.rs.pharmacyonline.BuildConfig" />
 
         <variable
@@ -239,24 +240,24 @@
                 </LinearLayout>
 
                 <TextView
-                    android:layout_marginTop="20dp"
                     android:layout_width="wrap_content"
-                    android:textSize="@dimen/tv_size_5"
-                    android:textColor="@color/black"
-                    android:layout_marginStart="8dp"
                     android:layout_height="wrap_content"
-                    tools:text="tv_version_code"
-                    android:text="@{`Version Code: ` + BuildConfig.VERSION_CODE}" />
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="20dp"
+                    android:text="@{`Version Code: ` + BuildConfig.VERSION_CODE}"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/tv_size_5"
+                    tools:text="tv_version_code" />
 
                 <TextView
-                    android:layout_marginTop="4dp"
                     android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="4dp"
+                    android:text="@{`Version Name: ` + BuildConfig.VERSION_NAME}"
                     android:textColor="@color/black"
                     android:textSize="@dimen/tv_size_5"
-                    android:layout_marginStart="8dp"
-                    android:layout_height="wrap_content"
-                    tools:text="tv_version_name"
-                    android:text="@{`Version Name: ` + BuildConfig.VERSION_NAME}" />
+                    tools:text="tv_version_name" />
 
                 <View
                     android:layout_width="match_parent"
@@ -269,17 +270,20 @@
                     android:layout_height="46dp"
                     android:background="@color/white"
                     android:clickable="true"
-                    android:focusable="true"
-                    android:foreground="?attr/selectableItemBackground"
-                    android:onClick="@{() -> viewModel.onSignOutBtnClick()}">
+                    android:focusable="true">
 
-                    <com.google.android.material.button.MaterialButton
+                    <TextView
                         style="@style/Widget.MaterialComponents.Button.TextButton"
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:paddingStart="0dp"
+                        android:foreground="?attr/selectableItemBackground"
+                        android:gravity="start|center_vertical"
+                        android:onClick="@{() -> viewModel.onSignOutBtnClick()}"
+                        android:paddingStart="8dp"
                         android:text="ВЫЙТИ"
                         android:textColor="@color/md_red_900"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
