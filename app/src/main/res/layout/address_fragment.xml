@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:background="@color/white"
     android:layout_height="match_parent"
     tools:context=".ui.checkout.AddressFragment">
 
@@ -74,34 +75,46 @@
         app:layout_constraintTop_toBottomOf="@id/calendarView" />
 
     <com.google.android.material.chip.ChipGroup
-        android:layout_width="0dp"
         android:id="@+id/chipGroup"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        app:checkedChip="@+id/chip1"
         app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
         app:layout_constraintStart_toStartOf="@id/guidelineStart"
-        app:layout_constraintTop_toBottomOf="@id/tv_vremya_dostavki">
+        app:layout_constraintTop_toBottomOf="@id/tv_vremya_dostavki"
+        app:singleSelection="true">
 
         <com.google.android.material.chip.Chip
+            android:id="@+id/chip1"
+            style="@style/ChipCustomStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="В течение дня" />
 
         <com.google.android.material.chip.Chip
+            android:id="@+id/chip2"
+            style="@style/ChipCustomStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="10-12" />
 
         <com.google.android.material.chip.Chip
+            android:id="@+id/chip3"
+            style="@style/ChipCustomStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="12-14" />
 
         <com.google.android.material.chip.Chip
+            android:id="@+id/chip4"
+            style="@style/ChipCustomStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="14-16" />
 
         <com.google.android.material.chip.Chip
+            android:id="@+id/chip5"
+            style="@style/ChipCustomStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="16-18" />
@@ -110,14 +123,14 @@
 
 
     <com.google.android.material.button.MaterialButton
+        android:id="@+id/mb_buy_step2"
         android:layout_width="0dp"
-        app:layout_constraintTop_toBottomOf="@id/chipGroup"
-        app:layout_constraintStart_toStartOf="@id/guidelineStart"
-        app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
+        android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:backgroundTint="@color/colorAccent"
         android:text="Продолжить"
-        android:layout_height="wrap_content"
-        android:id="@+id/mb_buy_step2" />
+        app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
+        app:layout_constraintStart_toStartOf="@id/guidelineStart"
+        app:layout_constraintTop_toBottomOf="@id/chipGroup" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

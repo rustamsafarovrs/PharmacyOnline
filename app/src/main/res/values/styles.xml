@@ -72,4 +72,21 @@
         <item name="android:background">@drawable/rounded_dialog</item>
     </style>
 
+    <style name="ChipCustomStyle" parent="Widget.MaterialComponents.Chip.Choice">
+        <!--        <item name="checkedIconEnabled">false</item>-->
+        <!--        <item name="android:background">@color/chip_background</item>-->
+        <!--        <item name="checkedIcon">@null</item>-->
+        <!--        <item name="android:checkable">true</item>-->
+
+        <!-- Chip background color selector -->
+        <item name="chipBackgroundColor">@color/chip_background</item>
+        <!-- Border color -->
+        <item name="chipStrokeColor">@color/md_black_1000</item>
+
+        <!-- Chip text color selector -->
+        <item name="android:textColor">@color/mtrl_choice_chip_text_color</item>
+        <!-- Chip close icon color selector -->
+        <item name="closeIconTint">@color/mtrl_chip_close_icon_tint</item>
+    </style>
+
 </resources>

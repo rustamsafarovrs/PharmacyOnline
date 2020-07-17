@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import kotlinx.android.synthetic.main.address_fragment.*
 import tj.rs.pharmacyonline.R
 
 class AddressFragment : Fragment() {
@@ -27,6 +28,11 @@ class AddressFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProvider(this).get(AddressViewModel::class.java)
 
+        chipGroup.setOnCheckedChangeListener { group, checkedId ->
+            if (checkedId == -1) {
+                chip1.isChecked = true
+            }
+        }
 
     }
 
