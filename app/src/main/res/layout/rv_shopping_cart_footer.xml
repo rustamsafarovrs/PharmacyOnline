@@ -13,6 +13,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="wrap_content"
+        android:paddingBottom="20dp"
         android:layout_height="wrap_content">
 
 
@@ -48,11 +49,24 @@
             android:id="@+id/tv_price_summ"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{shoppingCartViewModel.sum + ` TJS`}"
+            android:textColor="@color/md_grey_800"
+            android:text="@{`Всего ` + shoppingCartViewModel.sum + ` TJS`}"
             android:textSize="@dimen/tv_size_3"
             app:layout_constraintStart_toStartOf="@id/guidelineStart"
             app:layout_constraintTop_toBottomOf="@id/dividerView"
             tools:text="tv_price_summ" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/mb_buy"
+            android:layout_width="0dp"
+            android:layout_height="56dp"
+            android:layout_marginTop="16dp"
+            android:onClick="@{() -> shoppingCartViewModel.onBuyBtnClick()}"
+            android:text="Заказать"
+            app:backgroundTint="@color/colorAccent"
+            app:layout_constraintEnd_toStartOf="@+id/guidelineEnd"
+            app:layout_constraintStart_toStartOf="@+id/guidelineStart"
+            app:layout_constraintTop_toBottomOf="@+id/tv_price_summ" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

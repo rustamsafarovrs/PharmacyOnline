@@ -48,4 +48,10 @@ class ShoppingCartViewModel : ViewModel() {
         }
     }
 
+    val openAddressFragment = MutableLiveData<Event<Unit>>()
+
+    fun onBuyBtnClick() {
+        openAddressFragment.postValue(Event(Unit))
+    }
+
 }
